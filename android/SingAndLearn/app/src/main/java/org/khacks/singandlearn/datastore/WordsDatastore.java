@@ -36,8 +36,12 @@ public class WordsDatastore extends SingToLearnDatastore {
 
     public WordsScore getSongWordsScore(String songId) {
         SQLiteDatabase r = helper.getReadableDatabase();
-        Cursor c = r.rawQuery("SELECT SUM("+helper.WORD_CORRECT +"), SUM("+helper.WORD_ATTEMPTS+") FROM " + helper.TABLE_NAME + " WHERE "+helper.WORD_SONG+" = ?",
+        Cursor c = r.rawQuery(
+                "SELECT SUM(" + helper.WORD_CORRECT + "), " +
+                "SUM(" + helper.WORD_ATTEMPTS + ") FROM " + helper.TABLE_NAME +
+                " WHERE " + helper.WORD_SONG + " = ?",
                 new String[]{songId});
+
         if (c.getColumnCount() > 0) {
             c.moveToFirst();
             WordsScore wordsScore = new WordsScore();
