@@ -9,7 +9,8 @@ def transform_meta(meta_in):
 	transforms = {'ti': 'title', 'ar': 'artist', 'al': 'album'}
 	out = {}
 	for transform_field in transforms.keys():
-		out[transforms[transform_field]] = meta_in[transform_field]
+		if transform_field in meta_in:
+			out[transforms[transform_field]] = meta_in[transform_field]
 	return out
 
 def readlines(file):
@@ -18,7 +19,7 @@ def readlines(file):
 
 def cleanup_empty_lines(lyrics):
 	out = []
-	running_count = 0
+	running_count = 0.0
 	index = 0
 	for lyric in lyrics:
 		if lyric[1] == '':
@@ -72,6 +73,8 @@ def parse_lyrics_file(file):
 			line_parse = line[0].split(':')
 			meta[line_parse[0]] = line_parse[1]
 		else:
+			if not line[1]:
+				line = (line[0], '')
 			lyrics.append((parse_timecode(line[0]), line[1].rstrip('\r')))
 	meta_fixed = transform_meta(meta)
 	meta_fixed['lyrics'] = cleanup_empty_lines(lyrics)
@@ -80,4 +83,4 @@ def parse_lyrics_file(file):
 
 
 if __name__ == '__main__':
-	print json.dumps(parse_lyrics_file('../data/lyrics/u2 - vertigo.lrc'))
+	print json.dumps(parse_lyrics_file(sys.argv[1]))
