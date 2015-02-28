@@ -7,37 +7,51 @@ import android.database.Cursor;
  */
 public class Song {
 
-
-
-    private final String name;
-    private final String raw_lyrics;
-    private final double score;
-    private final String id;
-    private final String artist;
-
-    private double raw_tries;
-    private double raw_score;
+    public final String name;
+    public final String raw_lyrics;
+    private WordsScore score;
+    public final String _id;
+    public final String artist;
+    public final String fileName;
 
     public Song(Cursor cursor) {
-        id = cursor.getString(
-                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_ID));
+        _id = cursor.getString(
+                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_ID)
+        );
 
         artist = cursor.getString(
-                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_ARTIST));
+                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_ARTIST)
+        );
 
         name = cursor.getString(
-                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_NAME));
+                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_NAME)
+        );
 
         raw_lyrics = cursor.getString(
-                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_LYRICS));
+                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_LYRICS)
+        );
 
-        score = cursor.getDouble(
-                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_SCORE));
+        fileName = cursor.getString(
+                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_FILENAME)
+        );
+
+        // score = cursor.getDouble(
+        //        cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_SCORE));
     }
 
     public void fetchScores(WordsDatastore wordsDatastore) {
-        Word.WordsScore score = wordsDatastore.getSongScore(this.id);
-
-
+        score = wordsDatastore.getSongWordsScore(this._id);
     }
+
+    public boolean hasScore() {
+        return score != null;
+    }
+
+    public double getRawTries() {
+        return score.number_attempts;
+    }
+    public double getRawScore() {
+        return score.number_successes / score.number_attempts;
+    }
+
 }

@@ -1,12 +1,12 @@
 package org.khacks.singandlearn;
 
-private long id;
-private String title;
-private String artist;
+class SongOld {
 
-class Song {
+    private long id;
+    private String title;
+    private String artist;
 
-    public Song(long songID, String songTitle, String songArtist) {
+    public SongOld(long songID, String songTitle, String songArtist) {
         id = songID;
         title = songTitle;
         artist = songArtist;

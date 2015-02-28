@@ -9,11 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class SongsOpenHelper extends SingToLearnOpenHelper {
 
-    static final String SONG_ID = "id";
+    static final String SONG_ID = "_id";
     static final String SONG_ARTIST = "artist";
     static final String SONG_NAME = "name";
     static final String SONG_LYRICS = "lyrics";
     static final String SONG_SCORE = "score";
+    static final String SONG_FILENAME = "filename";
 
     private static final int DATABASE_VERSION = 1;
 
@@ -25,6 +26,7 @@ public class SongsOpenHelper extends SingToLearnOpenHelper {
                     SONG_ARTIST + " TEXT, " +
                     SONG_NAME + " TEXT, " +
                     SONG_LYRICS + " TEXT, " +
+                    SONG_FILENAME + " TEXT, " +
                     SONG_SCORE + " DOUBLE); ";
 
     SongsOpenHelper(Context context) {

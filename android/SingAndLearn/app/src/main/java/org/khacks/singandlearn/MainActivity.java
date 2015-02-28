@@ -2,18 +2,26 @@ package org.khacks.singandlearn;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class MainActivity extends Activity {
 
-    private ArrayList<Song> songList;
-    private ListView songView;
+    private ArrayList<SongOld> songList;
+    //private ListView songView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +33,12 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-        songView = (ListView)findViewById(R.id.song_list);
-        songList = new ArrayList<Song>();
+        //songView = (ListView)findViewById(R.id.song_list);
+        songList = new ArrayList<SongOld>();
 
         getSongList();
-        Collections.sort(songList, new Comparator<Song>(){
-            public int compare(Song a, Song b){
+        Collections.sort(songList, new Comparator<SongOld>() {
+            public int compare(SongOld a, SongOld b) {
                 return a.getTitle().compareTo(b.getTitle());
             }
         });
@@ -55,7 +63,7 @@ public class MainActivity extends Activity {
                 long thisId = musicCursor.getLong(idColumn);
                 String thisTitle = musicCursor.getString(titleColumn);
                 String thisArtist = musicCursor.getString(artistColumn);
-                songList.add(new Song(thisId, thisTitle, thisArtist));
+                songList.add(new SongOld(thisId, thisTitle, thisArtist));
             }
             while (musicCursor.moveToNext());
         }
