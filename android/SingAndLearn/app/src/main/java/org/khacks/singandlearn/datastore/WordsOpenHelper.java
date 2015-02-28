@@ -1,8 +1,6 @@
 package org.khacks.singandlearn.datastore;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by iain on 2/28/15.
@@ -21,7 +19,7 @@ public class WordsOpenHelper extends SingToLearnOpenHelper {
     private static final String WORDS_TABLE_NAME = "words";
 
     protected static final String WORDS_TABLE_CREATE =
-            "CREATE TABLE " + TABLE_NAME + " (" +
+            "CREATE TABLE " + WORDS_TABLE_NAME + " (" +
                     WORD_ID + " TEXT, " +
                     WORD_WORD+ " TEXT, " +
                     WORD_SONG  + " TEXT, " +

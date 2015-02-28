@@ -1,21 +1,19 @@
 package org.khacks.singandlearn;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+
+import org.khacks.singandlearn.datastore.SongsDatastore;
+import org.khacks.singandlearn.datastore.SongsOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 public class MainActivity extends Activity {
@@ -27,25 +25,19 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
 
-        //songView = (ListView)findViewById(R.id.song_list);
-        songList = new ArrayList<SongOld>();
+
+        songView = (ListView)findViewById(R.id.song_list);
+        songList = new ArrayList<>();
 
         getSongList();
+        SongsDatastore datastore = new SongsDatastore(this);
+        SimpleCursorAdapter songAdapter = new SimpleCursorAdapter(this,R.layout.song, datastore.getAllSongs(),
+                new String[]{SongsOpenHelper.SONG_NAME, SongsOpenHelper.SONG_ARTIST},
+                new int[] {R.id.song_title, R.id.song_artist}, 0);
 
-        Collections.sort(songList, new Comparator<SongOld>() {
-            public int compare(SongOld a, SongOld b) {
-                return a.getTitle().compareTo(b.getTitle());
-            }
-        });
 
-        SongAdapter songAdt = new SongAdapter(this, songList);
-        songView.setAdapter(songAdt);
+        songView.setAdapter(songAdapter);
     }
 
     private void getSongList() {
@@ -94,19 +86,4 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
 }

@@ -28,7 +28,7 @@ public class SongsDatastore {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(
-                SongsOpenHelper.TABLE_NAME,
+                SongsOpenHelper.DATABASE_NAME,
                 null,
                 "id = ?",
                 new String[]{songId},
@@ -45,19 +45,15 @@ public class SongsDatastore {
         return song;
     }
 
-    public ArrayList<Song> getAllSongs() {
-        ArrayList<Song> songs = new ArrayList<Song>();
+    public Cursor getAllSongs() {
+
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        Cursor cursor = db.query(
-                SongsOpenHelper.TABLE_NAME,
+        return db.query( SongsOpenHelper.SONGS_TABLE_NAME,
                 null, null, null,
                 null, null, null);
 
-        while (cursor.moveToNext()) {
-            songs.add(new Song(cursor));
-        }
-        return songs;
+
     }
 
     private ArrayList<Song> fetchSong(String where) {
@@ -68,11 +64,16 @@ public class SongsDatastore {
     }
 
     public ArrayList<Song> getAllSongsWithScores(WordsDatastore wordsDatastore) {
-        ArrayList<Song> allSongs = getAllSongs();
-        for (Song s : allSongs) {
+        Cursor songCursor = getAllSongs();
+        ArrayList<Song> songList = new ArrayList<>();
+        while(songCursor.moveToNext()){
+            Song s = new Song(songCursor);
             s.fetchScores(wordsDatastore);
+            songList.add(s);
         }
-        return allSongs;
+
+
+        return songList;
     }
 
 }
