@@ -60,6 +60,13 @@ public class SongsDatastore {
         return songs;
     }
 
+    private ArrayList<Song> fetchSong(String where) {
+        if (where != null) {
+
+        }
+        return null;
+    }
+
     public ArrayList<Song> getAllSongsWithScores(WordsDatastore wordsDatastore) {
         ArrayList<Song> allSongs = getAllSongs();
         for (Song s : allSongs) {

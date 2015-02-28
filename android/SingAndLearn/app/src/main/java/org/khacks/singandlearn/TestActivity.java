@@ -1,11 +1,13 @@
 package org.khacks.singandlearn;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+
+import org.khacks.singandlearn.datastore.Song;
+import org.khacks.singandlearn.datastore.SongsDatastore;
 
 /**
  * Created by gus on 28/02/15.
@@ -13,24 +15,27 @@ import android.os.PersistableBundle;
 public class TestActivity extends Activity {
 
     private MediaPlayer mediaPlayer;
-    public static final String SONG_FILE_KEY = "SONG_FILE";
-    public static final String SONG_ARTIST_KEY = "SONG_ARTIST";
-    public static final String SONG_NAME_KEY = "SONG_NAME";
+    private Song song;
+
+    public static final String SONG_ID = "SONG_ID";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        Intent comingIntent = getIntent();
 
+        String songId = getIntent().getExtras().getString(SONG_ID);
 
-        Bundle extras = comingIntent.getExtras();
+        SongsDatastore datastore = new SongsDatastore(this);
+        song = datastore.getSong(songId);
 
-        String songFile = extras.getString(SONG_FILE_KEY);
-        String songArtist = extras.getString(SONG_ARTIST_KEY);
-
-        Uri songUri = Uri.parse(songFile);
+        Uri songUri = Uri.parse(song.fileName);
         mediaPlayer = MediaPlayer.create(this, songUri);
-        
 
+
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 }
