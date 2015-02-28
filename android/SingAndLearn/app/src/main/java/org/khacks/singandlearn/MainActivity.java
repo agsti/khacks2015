@@ -35,6 +35,8 @@ public class MainActivity extends Activity {
             }
         });
 
+        SongAdapter songAdt = new SongAdapter(this, songList);
+        songView.setAdapter(songAdt);
     }
 
     private void getSongList() {

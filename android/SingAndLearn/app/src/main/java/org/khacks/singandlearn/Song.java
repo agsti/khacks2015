@@ -4,7 +4,7 @@ private long id;
 private String title;
 private String artist;
 
-class Song {
+public class Song {
 
     public Song(long songID, String songTitle, String songArtist) {
         id = songID;
