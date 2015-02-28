@@ -12,10 +12,12 @@ abstract class SingToLearnOpenHelper extends SQLiteOpenHelper {
     protected static final int DATABASE_VERSION = 2;
     protected static String TABLE_CREATE;
     protected static String TABLE_NAME;
+    protected final Context context;
 
 
     public SingToLearnOpenHelper(Context context, String table_name, String table_create) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
         TABLE_NAME = table_name;
         TABLE_CREATE = table_create;
     }
@@ -27,11 +29,15 @@ abstract class SingToLearnOpenHelper extends SQLiteOpenHelper {
         db.execSQL(TABLE_CREATE);
     }
 
+    public void onSetup() {
+
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
+        onSetup();
     }
-    
-    
+
+
 }
