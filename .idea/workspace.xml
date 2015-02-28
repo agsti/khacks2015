@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4e532ff3-baab-42b6-9d18-dae0e0bcd7f2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/android/SingAndLearn/app/src/main/java/org/khacks/singandlearn/MainActivity.java" afterPath="$PROJECT_DIR$/android/SingAndLearn/app/src/main/java/org/khacks/singandlearn/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="khacks2015.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/SingAndLearn/app/src/main/java/org/khacks/singandlearn/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25028834" vertical-offset="258" max-vertical-offset="1875">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.27912343" vertical-offset="183" max-vertical-offset="1875">
+              <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -474,6 +475,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4e532ff3-baab-42b6-9d18-dae0e0bcd7f2" name="Default" comment="" />
@@ -535,8 +539,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/android/SingAndLearn/app/src/main/java/org/khacks/singandlearn/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25028834" vertical-offset="258" max-vertical-offset="1875">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.27912343" vertical-offset="183" max-vertical-offset="1875">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
