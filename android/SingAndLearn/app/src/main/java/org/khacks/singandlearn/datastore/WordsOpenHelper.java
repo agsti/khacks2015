@@ -11,9 +11,9 @@ public class WordsOpenHelper extends SingToLearnOpenHelper {
 
     private static final String WORD_ID = "id";
     private static final String WORD_WORD = "word";
-    private static final String WORD_SONG = "song";
-    private static final String WORD_CORRECT = "correct";
-    private static final String WORD_ATTEMPTS = "attempts";
+    static final String WORD_SONG = "song";
+    static final String WORD_CORRECT = "correct";
+    static final String WORD_ATTEMPTS = "attempts";
     private static final String WORD_TRANSLATION = "translation";
     private static final String WORD_SIMILAR = "";
 
