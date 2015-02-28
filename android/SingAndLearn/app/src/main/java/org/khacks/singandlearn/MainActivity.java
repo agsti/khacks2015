@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 
 public class MainActivity extends Activity {
 
-    // comentario superchulo
-    
+
+    //GOnzalo mol                       aaaaa
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
