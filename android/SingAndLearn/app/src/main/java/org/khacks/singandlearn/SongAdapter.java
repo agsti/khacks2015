@@ -1,7 +1,7 @@
 package org.khacks.singandlearn;
 
 import android.view.View;
-import android.view.ViewGroup;
+import
 import android.widget.BaseAdapter;
 
 public class SongAdapter extends BaseAdapter {
