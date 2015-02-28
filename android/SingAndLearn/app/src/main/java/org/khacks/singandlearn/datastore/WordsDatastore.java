@@ -31,7 +31,7 @@ public class WordsDatastore extends SingToLearnDatastore {
                 new String[]{songId});
         if (c.getColumnCount() > 0) {
             c.moveToFirst();
-            Word.WordsScore wordsScore = new Word.WordsScore()();
+            Word.WordsScore wordsScore = new Word.WordsScore();
             wordsScore.number_successes = c.getInt(0);
             wordsScore.number_attempts = c.getInt(1);
             return wordsScore;

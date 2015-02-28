@@ -1,8 +1,14 @@
 package org.khacks.singandlearn;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
-import
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class SongAdapter extends BaseAdapter {
 
