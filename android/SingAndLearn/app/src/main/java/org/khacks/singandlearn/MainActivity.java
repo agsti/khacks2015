@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 public class MainActivity extends Activity {
 
 
-    //GOnzalo mol                       aaaaa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

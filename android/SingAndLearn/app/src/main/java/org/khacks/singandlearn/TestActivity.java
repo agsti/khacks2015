@@ -30,7 +30,10 @@ public class TestActivity extends Activity {
 
         Uri songUri = Uri.parse(songFile);
         mediaPlayer = MediaPlayer.create(this, songUri);
-        
+
 
     }
+
+
+
 }
