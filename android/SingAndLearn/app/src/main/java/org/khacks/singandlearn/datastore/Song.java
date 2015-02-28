@@ -7,6 +7,7 @@ import android.database.Cursor;
  */
 public class Song {
 
+
     public final String name;
     public final String raw_lyrics;
     private WordsScore score;

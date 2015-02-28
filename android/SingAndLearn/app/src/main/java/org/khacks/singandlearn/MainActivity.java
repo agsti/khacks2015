@@ -33,10 +33,11 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-        songView = (ListView)findViewById(R.id.song_list);
+        //songView = (ListView)findViewById(R.id.song_list);
         songList = new ArrayList<SongOld>();
 
         getSongList();
+
         Collections.sort(songList, new Comparator<SongOld>() {
             public int compare(SongOld a, SongOld b) {
                 return a.getTitle().compareTo(b.getTitle());
