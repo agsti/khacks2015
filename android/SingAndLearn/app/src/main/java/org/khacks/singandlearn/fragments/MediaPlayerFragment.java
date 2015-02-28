@@ -12,13 +12,15 @@ import android.widget.TextView;
 import org.khacks.singandlearn.R;
 import org.khacks.singandlearn.TestActivity;
 
+import java.io.IOException;
+
 /**
  * Created by gus on 28/02/15.
  */
 public class MediaPlayerFragment extends Fragment {
 
     TextView songTV, artistTV, goodTV, wrongTV;
-    ImageButton playPauseBTN;
+    ImageButton rewindBTN;
     private MediaPlayer mediaPlayer;
     private int rewindPoint;
 
@@ -29,11 +31,16 @@ public class MediaPlayerFragment extends Fragment {
         artistTV = (TextView) mainView.findViewById(R.id.song_a);
         goodTV = (TextView) mainView.findViewById(R.id.good_score);
         wrongTV = (TextView) mainView.findViewById(R.id.wrong_score);
-        playPauseBTN = (ImageButton) mainView.findViewById(R.id.playpause_btn);
-        playPauseBTN.setOnClickListener(new View.OnClickListener() {
+        rewindBTN = (ImageButton) mainView.findViewById(R.id.playpause_btn);
+        rewindBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // when should we pause?
-
+                mediaPlayer.stop();
+                try {
+                    mediaPlayer.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 mediaPlayer.seekTo(rewindPoint);
 
             }
