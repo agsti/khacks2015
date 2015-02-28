@@ -15,6 +15,12 @@ public class SongsDatastore {
 
     public SongsDatastore(Context context) {
         helper = new SongsOpenHelper(context);
+    }
+
+    public void updateWord(Word w) {
+
+    }
+    public void insertWord(Word w) {
 
     }
 
@@ -32,6 +38,13 @@ public class SongsDatastore {
         if (cursor.getCount() == 0) return null;
         return new Song(cursor);
     }
+
+    public Song getSongWithScores(String songId, WordsDatastore wordsDatastore) {
+        Song song = getSong(songId);
+        song.fetchScores(wordsDatastore);
+        return song;
+    }
+
     public ArrayList<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<Song>();
         SQLiteDatabase db = helper.getReadableDatabase();

@@ -25,13 +25,23 @@ public class WordsDatastore extends SingToLearnDatastore {
         // return the avg score
         return 0; // range 0 - 100 as an integer
     }
-    public Word.WordsScore getSongWordsScore(String songId) {
+
+    public void updateWord(Word w) {
+
+    }
+    public void insertWord(Word w) {
+
+    }
+
+
+    public WordsScore getSongWordsScore(String songId) {
         SQLiteDatabase r = helper.getReadableDatabase();
         Cursor c = r.rawQuery("SELECT SUM("+helper.WORD_CORRECT +"), SUM("+helper.WORD_ATTEMPTS+") FROM " + helper.TABLE_NAME + " WHERE "+helper.WORD_SONG+" = ?",
                 new String[]{songId});
         if (c.getColumnCount() > 0) {
             c.moveToFirst();
-            Word.WordsScore wordsScore = new Word.WordsScore()();
+
+            WordsScore wordsScore = new WordsScore();
             wordsScore.number_successes = c.getInt(0);
             wordsScore.number_attempts = c.getInt(1);
             return wordsScore;

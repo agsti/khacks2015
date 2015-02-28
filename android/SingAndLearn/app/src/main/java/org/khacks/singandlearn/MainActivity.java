@@ -20,7 +20,7 @@ import java.util.Comparator;
 
 public class MainActivity extends Activity {
 
-    private ArrayList<Song> songList;
+    private ArrayList<SongOld> songList;
     private ListView songView;
 
     @Override
@@ -33,16 +33,19 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-        songView = (ListView)findViewById(R.id.song_list);
-        songList = new ArrayList<Song>();
+        //songView = (ListView)findViewById(R.id.song_list);
+        songList = new ArrayList<SongOld>();
 
         getSongList();
-        Collections.sort(songList, new Comparator<Song>() {
-            public int compare(Song a, Song b) {
+
+        Collections.sort(songList, new Comparator<SongOld>() {
+            public int compare(SongOld a, SongOld b) {
                 return a.getTitle().compareTo(b.getTitle());
             }
         });
 
+        SongAdapter songAdt = new SongAdapter(this, songList);
+        songView.setAdapter(songAdt);
     }
 
     private void getSongList() {
@@ -63,7 +66,7 @@ public class MainActivity extends Activity {
                 long thisId = musicCursor.getLong(idColumn);
                 String thisTitle = musicCursor.getString(titleColumn);
                 String thisArtist = musicCursor.getString(artistColumn);
-                songList.add(new Song(thisId, thisTitle, thisArtist));
+                songList.add(new SongOld(thisId, thisTitle, thisArtist));
             }
             while (musicCursor.moveToNext());
         }
