@@ -1,7 +1,6 @@
 package org.khacks.singandlearn;
 
 class SongOld {
-
     private long id;
     private String title;
     private String artist;

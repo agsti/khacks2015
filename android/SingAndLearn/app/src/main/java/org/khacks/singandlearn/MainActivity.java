@@ -21,7 +21,7 @@ import java.util.Comparator;
 public class MainActivity extends Activity {
 
     private ArrayList<SongOld> songList;
-    //private ListView songView;
+    private ListView songView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-        //songView = (ListView)findViewById(R.id.song_list);
+        songView = (ListView)findViewById(R.id.song_list);
         songList = new ArrayList<SongOld>();
 
         getSongList();
@@ -43,6 +43,8 @@ public class MainActivity extends Activity {
             }
         });
 
+        SongAdapter songAdt = new SongAdapter(this, songList);
+        songView.setAdapter(songAdt);
     }
 
     private void getSongList() {
