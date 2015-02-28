@@ -15,6 +15,7 @@ public class Song {
     private final String id;
     private final String artist;
 
+
     private double raw_tries;
     private double raw_score;
 

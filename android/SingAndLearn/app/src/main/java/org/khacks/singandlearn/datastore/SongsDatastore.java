@@ -51,7 +51,9 @@ public class SongsDatastore {
         if (where != null) {
 
         }
+        return null;
     }
+
     public ArrayList<Song> getAllSongsWithScores(WordsDatastore wordsDatastore) {
         ArrayList<Song> allSongs = getAllSongs();
         for (Song s : allSongs) {
