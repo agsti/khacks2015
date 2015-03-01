@@ -82,7 +82,7 @@ public class TestActivity extends Activity {
                     int highlightTo = (int) (lyricsString.length()*percentage);
                     Log.d("TestActivity", "highlighting till "+highlightTo);
                     lyricsFragment.setLyricsHighlight(highlightTo);
-                    
+
 
                 }catch (IllegalStateException e){
                     Log.d("TestAct", "illegalState: "+e.getMessage());
