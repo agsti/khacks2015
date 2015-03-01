@@ -14,12 +14,15 @@ public class LyricsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return new TextView(getActivity());
+        TextView tv = new TextView(getActivity());
+        tv.setText("HERE GOES THE LYRICS");
+        return tv;
     }
 
     public void setLyrics(String lyric){
         TextView view = (TextView)getView();
         view.setText(lyric);
+
     }
 
 
