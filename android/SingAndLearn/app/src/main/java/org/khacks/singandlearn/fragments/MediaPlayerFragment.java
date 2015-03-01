@@ -12,8 +12,6 @@ import android.widget.TextView;
 import org.khacks.singandlearn.R;
 import org.khacks.singandlearn.TestActivity;
 
-import java.io.IOException;
-
 /**
  * Created by gus on 28/02/15.
  */
@@ -35,13 +33,8 @@ public class MediaPlayerFragment extends Fragment {
         rewindBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // when should we pause?
-                mediaPlayer.stop();
-                try {
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 mediaPlayer.seekTo(rewindPoint);
+
 
             }
         });
