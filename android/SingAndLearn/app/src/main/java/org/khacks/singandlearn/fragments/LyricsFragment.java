@@ -20,6 +20,7 @@ public class LyricsFragment extends Fragment {
 
     private  SpannableStringBuilder style;
     private ForegroundColorSpan color = new ForegroundColorSpan (Color.parseColor("#1E88E5"));
+    private String lyric;
 
 
     @Override
@@ -40,12 +41,15 @@ public class LyricsFragment extends Fragment {
 
 
     public void setLyricsHighlight( int end){
-        style.setSpan(color,0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
-        ((TextView)getView()).setText(style);
+        if(end < lyric.length()) {
+            style.setSpan(color, 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ((TextView) getView()).setText(style);
+        }
     }
 
 
     public void setLyrics(String lyric){
+        this.lyric = lyric;
         TextView view = (TextView)getView();
         style.clear();
         style.append(lyric);
