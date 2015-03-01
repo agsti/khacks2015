@@ -90,6 +90,9 @@ public class Song {
     }
 
     public RawLyricsData getLineAtIndex(int index) {
+        if (lyrics.size() < index - 1) return null;
+        if (index < 0) return null;
+        
         return lyrics.get(index);
     }
 
