@@ -40,6 +40,9 @@ public class TestActivity extends Activity {
     private WordsDatastore wordsDatastore;
 
 
+    Song.LyricsResult lastResult;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,8 +87,10 @@ public class TestActivity extends Activity {
                 try {
                     int position = mediaPlayer.getCurrentPosition() / 1000;
                     Song.LyricsResult result = song.getLyricsAtPosition(position);
+                    if(lastResult == result) {
+                        gapsFragment.clear();
+                    }
 
-                    String lyricsString = result.getLyrics().getText();
 
                     StringBuilder sb = new StringBuilder();
                     String[] parts = lyricsString.split(" ");
