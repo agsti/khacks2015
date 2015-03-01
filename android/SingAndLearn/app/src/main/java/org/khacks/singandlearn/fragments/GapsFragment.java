@@ -41,13 +41,14 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
 
-
         // TODO: the line below might not work,
-        TextView view = (TextView) inflater.inflate(R.layout.word_layout, (ViewGroup) getView());
+        TextView view = (TextView) inflater.inflate(R.layout.word_layout, (ViewGroup) getView(), false);
+
         view.setOnClickListener(this);
         view.setText(word.getWord());
         view.setTag(word);
 
+        layout.addView(view);
 
 
     }

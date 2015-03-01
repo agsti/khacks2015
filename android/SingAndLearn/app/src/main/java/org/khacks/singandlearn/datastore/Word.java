@@ -34,7 +34,7 @@ public class Word {
         this.word = cursor.getString(
                 cursor.getColumnIndexOrThrow(WordsOpenHelper.WORD_WORD));
         this.song = cursor.getString(
-                cursor.getColumnIndexOrThrow(WordsOpenHelper.WORD_SONG)
+                cursor.getColumnIndex(WordsOpenHelper.WORD_SONG)
         );
         this.is_star = cursor.getInt(
                 cursor.getColumnIndexOrThrow(WordsOpenHelper.WORD_ISSTAR)

@@ -84,8 +84,28 @@ public class TestActivity extends Activity {
                 try {
                     int position = mediaPlayer.getCurrentPosition() / 1000;
                     Song.LyricsResult result = song.getLyricsAtPosition(position);
+
                     String lyricsString = result.getLyrics().getText();
-                    lyricsFragment.setLyrics(lyricsString);
+                    String word_longest = "";
+                    int word_longest_index = 0;
+                    for (String word : result.getLyrics().getList()) {
+                        if (word.length() > word_longest.length()) {
+                            word_longest = word;
+                            break;
+                        }
+                        word_longest_index++;
+                    }
+                    String[] parts = lyricsString.split(" ");
+                    parts[word_longest_index] = "_____";
+                    StringBuilder sb = new StringBuilder();
+                    for (String part : parts) {
+                        sb.append(part);
+                        sb.append(' ');
+                    }
+                    lyricsFragment.setLyrics(sb.toString());
+                    Word wordRight = wordsDatastore.getWord(song._id, word_longest);
+                    setGapWords(wordRight);
+
                     int index = result.getLyrics().getIndex() + 1;
                     RawLyricsData nextSegmentData = song.getLineAtIndex(index);
                     int size = (int) (nextSegmentData.getTime() - result.getLyrics().getTime());

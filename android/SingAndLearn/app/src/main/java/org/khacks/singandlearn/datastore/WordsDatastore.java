@@ -83,7 +83,7 @@ public class WordsDatastore extends SingToLearnDatastore {
 
         Cursor c = helper.getReadableDatabase().query(
                 WordsOpenHelper.WORDS_TABLE_NAME,
-                new String[]{WordsOpenHelper.WORD_WORD,WordsOpenHelper.WORD_COMPLEXITY},
+                null,
                 WordsOpenHelper.WORD_COMPLEXITY+"> 3 AND "+WordsOpenHelper.WORD_SONG+"= ?",
                 new String[]{songName},
                 null,
@@ -96,5 +96,21 @@ public class WordsDatastore extends SingToLearnDatastore {
             i++;
         }
         return words;
+    }
+
+    public Word getWord(String songId, String wordStr) {
+        SQLiteDatabase r = helper.getReadableDatabase();
+        Cursor c = r.rawQuery(
+                "SELECT * " +
+                        " FROM " + WordsOpenHelper.WORDS_TABLE_NAME +
+                        " WHERE " + WordsOpenHelper.WORD_SONG + " = ? AND " + WordsOpenHelper.WORD_WORD + " = ?",
+                new String[]{songId, wordStr});
+
+        if (c.getColumnCount() > 0) {
+            c.moveToFirst();
+            Word word2 = new Word(c);
+            return word2;
+        }
+        return null;
     }
 }
