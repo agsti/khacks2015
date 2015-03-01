@@ -24,6 +24,7 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
     protected final Context context;
 
     private static SingToLearnOpenHelper instance;
+    private WordsDatastore wordsDatastore;
 
     public static SingToLearnOpenHelper getInstance(Context c){
         if (instance == null){
@@ -55,34 +56,34 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
                 {R.raw.cool_kids_data,       R.raw.cool_kids},
                 {R.raw.vertigo_data,         R.raw.vertigo_data}
         };
+        SongsDatastore songsDatastore = new SongsDatastore(this.context);
+        this.wordsDatastore = new WordsDatastore(this.context);
         for (Integer[] song : songs) {
             InputStream dataIn = this.context.getResources().openRawResource(song[0]);
             String songFilename = context.getApplicationContext().getResources().getResourceEntryName(song[1]);
             final Gson gson = new Gson();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));
             RawSongData target = gson.fromJson(reader, RawSongData.class);
-            addSong(target, songFilename, gson.toJson(target.lyrics));
             try {
                 reader.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            addSong(songsDatastore, target, songFilename, gson.toJson(target.lyrics));
         }
     }
 
 
-    private void addSong(RawSongData data, String songFilename, String jsonData) {
-        SongsDatastore songsDatastore = new SongsDatastore(this.context);
+    private void addSong(SongsDatastore store, RawSongData data, String songFilename, String jsonData) {
         for (RawWordData wordData : data.words.values()) {
             wordData.song_id = data.id;
             addWord(wordData);
         }
-        songsDatastore.insertSong(data.id, data.title, data.artist, songFilename, jsonData);
+        store.insertSong(data.id, data.title, data.artist, songFilename, jsonData);
     }
 
     private void addWord(RawWordData wordData) {
-        WordsDatastore wordsDatastore = new WordsDatastore(this.context);
-        wordsDatastore.insertWord(wordData.word, wordData.song_id, wordData.complexity, wordData.score, wordData.seen);
+        this.wordsDatastore.insertWord(wordData.word, wordData.song_id, wordData.complexity, wordData.score, wordData.seen);
     }
 
     @Override
@@ -91,6 +92,5 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
         db.execSQL(SongsOpenHelper.SONGS_TABLE_CREATE);
         db.execSQL(WordsOpenHelper.WORDS_TABLE_CREATE);
     }
-
 
 }
