@@ -12,5 +12,5 @@ public class RawSongData {
     public String album;
 
     public Map<String, RawWordData> words;
-    public List<RawLyricData> lyricData;
+    public String id;
 }

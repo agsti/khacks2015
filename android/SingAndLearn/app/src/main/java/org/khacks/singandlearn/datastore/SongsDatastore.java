@@ -1,5 +1,6 @@
 package org.khacks.singandlearn.datastore;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,8 +18,19 @@ public class SongsDatastore {
         helper = new SongsOpenHelper(context);
     }
 
-    public void updateWord(Word w) {
-
+    public long insertSong(String songId, String title, String artist, String filename, String jsonLyrics) {
+        SQLiteDatabase writableDatabase = helper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        if (title != null) {
+            cv.put(SongsOpenHelper.SONG_NAME, title);
+        }
+        if (artist != null) {
+            cv.put(SongsOpenHelper.SONG_ARTIST, artist);
+        }
+        cv.put(SongsOpenHelper.SONG_FILENAME, filename);
+        cv.put(SongsOpenHelper.SONG_LYRICS, jsonLyrics);
+        cv.put(SongsOpenHelper.SONG_ID, songId);
+        return writableDatabase.insert(SongsOpenHelper.SONGS_TABLE_NAME, null, cv);
     }
     public void insertWord(Word w) {
 
@@ -71,8 +83,6 @@ public class SongsDatastore {
             s.fetchScores(wordsDatastore);
             songList.add(s);
         }
-
-
         return songList;
     }
 

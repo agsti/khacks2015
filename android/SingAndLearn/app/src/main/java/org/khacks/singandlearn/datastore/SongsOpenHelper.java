@@ -8,6 +8,7 @@ import org.khacks.singandlearn.R;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -43,21 +44,44 @@ public class SongsOpenHelper extends SingToLearnOpenHelper {
     @Override
     public void onSetup() {
         Integer[][] songs = new Integer[][]{
-                {R.raw.barbie_girl_data, R.raw.barbie_girl},
+                {R.raw.barbie_girl_data,     R.raw.barbie_girl},
                 {R.raw.i_gotta_feeling_data, R.raw.i_gotta_feeling},
-                {R.raw.sweet_child_data, R.raw.sweet_child},
-                {R.raw.cool_kids_data, R.raw.cool_kids},
-                {R.raw.vertigo_data, R.raw.vertigo}
+                {R.raw.sweet_child_data,     R.raw.sweet_child},
+                {R.raw.cool_kids_data,       R.raw.cool_kids},
+                {R.raw.vertigo_data,         R.raw.vertigo_data}
         };
         for (Integer[] song : songs) {
-            InputStream dataIn = context.getResources().openRawResource(song[0]);
+            InputStream dataIn = this.context.getResources().openRawResource(song[0]);
+            String songFilename = context.getApplicationContext().getResources().getResourceEntryName(song[1]);
             final Gson gson = new Gson();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));
-            addSong(gson.fromJson(reader, RawSongData.class));
+            try {
+                reader.reset();
+                StringBuilder sb = new StringBuilder();
+                String aux = "";
+                while ((aux = reader.readLine()) != null) {
+                    sb.append(aux);
+                }
+                addSong(gson.fromJson(reader, RawSongData.class), songFilename, sb.toString());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void addSong(RawSongData data) {
-
+    private void addSong(RawSongData data, String songFilename, String jsonData) {
+        SongsDatastore songsDatastore = new SongsDatastore(this.context);
+        for (RawWordData wordData : data.words.values()) {
+            wordData.song_id = data.id;
+            addWord(wordData);
+        }
+        songsDatastore.insertSong(data.id, data.title, data.artist, songFilename, jsonData);
     }
+
+    private void addWord(RawWordData wordData) {
+        WordsDatastore wordsDatastore = new WordsDatastore(this.context);
+        wordsDatastore.insertWord(wordData.word, wordData.song_id, wordData.complexity, wordData.score, wordData.seen);
+    }
+
 }

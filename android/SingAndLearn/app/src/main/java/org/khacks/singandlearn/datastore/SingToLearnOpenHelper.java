@@ -12,6 +12,7 @@ abstract class SingToLearnOpenHelper extends SQLiteOpenHelper {
     protected static final int DATABASE_VERSION = 2;
     protected final String TABLE_CREATE;
     protected final String TABLE_NAME;
+    public Context context;
 
 
     public SingToLearnOpenHelper(Context context, String table_name, String table_create) {

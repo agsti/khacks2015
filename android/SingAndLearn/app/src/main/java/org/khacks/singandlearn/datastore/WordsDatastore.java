@@ -1,10 +1,13 @@
 package org.khacks.singandlearn.datastore;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by iain on 2/28/15.
@@ -26,11 +29,26 @@ public class WordsDatastore extends SingToLearnDatastore {
         return 0; // range 0 - 100 as an integer
     }
 
-    public void updateWord(Word w) {
+    public void saveAttempt(Word word, boolean correct) {
+        String wordId = word.id;
+        word.setAttempt(correct);
+        SQLiteDatabase writableDatabase = helper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(WordsOpenHelper.WORD_CORRECT, word.correct);
+        cv.put(WordsOpenHelper.WORD_ATTEMPTS, word.attempts);
+        writableDatabase.update(WordsOpenHelper.WORDS_TABLE_NAME, cv, WordsOpenHelper.WORD_SONG + " = ?", new String[]{word.id});
 
     }
-    public void insertWord(Word w) {
-
+    public void insertWord(String word, String song, int complexity, double score, int seen) {
+        String  uniqueID = UUID.randomUUID().toString();
+        ContentValues cv = new ContentValues();
+        cv.put(WordsOpenHelper.WORD_WORD, word);
+        cv.put(WordsOpenHelper.WORD_SONG, song);
+        cv.put(WordsOpenHelper.WORD_COMPLEXITY, complexity);
+        cv.put(WordsOpenHelper.WORD_SCORE, score);
+        cv.put(WordsOpenHelper.WORD_SEEN, seen);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.insert(WordsOpenHelper.WORDS_TABLE_NAME, null, cv);
     }
 
 

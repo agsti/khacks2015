@@ -47,7 +47,8 @@ def extract_words(lyrics):
 					'seen': 1,
 					'at': [(lyric[0], word_raw)],
 					'complexity': len(word_clean),
-					'score': 0
+					'score': 0,
+					'word': word_clean
 				}
 				words[word_clean] = word
 			else:
