@@ -87,6 +87,7 @@ public class TestActivity extends Activity {
                 try {
                     int position = mediaPlayer.getCurrentPosition() / 1000;
                     Song.LyricsResult result = song.getLyricsAtPosition(position);
+                    String lyricsString = result.getLyrics().getText();
                     if(lastResult != result) {
                         gapsFragment.clear();
                     }
@@ -95,8 +96,10 @@ public class TestActivity extends Activity {
 
                     StringBuilder sb = new StringBuilder();
                     String[] parts = lyricsString.split(" ");
+                    String word_longest = "";
+                    if(result.getLyrics().getList() == null)return;
+
                     if (result.getLyrics().getList().size() > 0 && result.getLyrics().getList().size() == parts.length) {
-                        String word_longest = "";
                         int index2 = 0;
                         int word_longest_index = 0;
                         for (String word : result.getLyrics().getList()) {
@@ -169,6 +172,7 @@ public class TestActivity extends Activity {
         int luck = random.nextInt(4);
         gapsFragment.setCorrectAnswer(luck);
         int i = 0;
+
         while (i < 3){
             if(i == luck){
                 gapsFragment.putWord(correctOne);

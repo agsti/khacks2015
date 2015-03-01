@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.khacks.singandlearn.R;
 import org.khacks.singandlearn.TestActivity;
@@ -41,37 +39,37 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
         numWords =0;
     }
 
-    public void putWord(Word[] words){
+    public void putWord(Word word){
 
 
+        LinearLayout ll = (LinearLayout) getView();
         switch(numWords) {
             case 0:
-                LinearLayout ll = (LinearLayout) getView();
                 Button b1 = (Button) ll.findViewById(R.id.button1);
-                b1.setText(words[0].getWord());
+                b1.setText(word.getWord());
                 b1.setOnClickListener(this);
-                b1.setTag(words[0]);
+                b1.setTag(word);
             break;
 
             case 1:
             Button b2 = (Button) ll.findViewById(R.id.button2);
-            b2.setText(words[1].getWord());
+            b2.setText(word.getWord());
             b2.setOnClickListener(this);
-            b2.setTag(words[1]);
+            b2.setTag(word);
             break;
 
             case 2:
             Button b3 = (Button) ll.findViewById(R.id.button3);
-            b3.setText(words[2].getWord());
+            b3.setText(word.getWord());
             b3.setOnClickListener(this);
-            b3.setTag(words[2]);
+            b3.setTag(word);
             break;
 
             case 3:
             Button b4 = (Button) ll.findViewById(R.id.button4);
-            b4.setText(words[3].getWord());
+            b4.setText(word.getWord());
             b4.setOnClickListener(this);
-            b4.setTag(words[3]);
+            b4.setTag(word);
             break;
             default:
                 Log.wtf("YOU ARE FUCKED", "PRETTY MUCH");
