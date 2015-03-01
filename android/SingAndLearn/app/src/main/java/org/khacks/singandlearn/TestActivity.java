@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.util.Log;
 
 import org.khacks.singandlearn.datastore.Song;
 import org.khacks.singandlearn.datastore.SongsDatastore;
@@ -45,9 +45,10 @@ public class TestActivity extends Activity {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.result_act);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("testActivity", "onCreate");
+        setContentView(R.layout.test_layout);
 
         gapsFragment = (GapsFragment) getFragmentManager().findFragmentById(R.id.gaps);
         lyricsFragment = (LyricsFragment) getFragmentManager().findFragmentById(R.id.lyrics);
@@ -61,7 +62,7 @@ public class TestActivity extends Activity {
 
         Uri uri = Uri.parse("android.resource://org.khacks.singandlearn/raw/"+song.fileName);
 
-        mediaPlayer = MediaPlayer.create(this, uri);
+        mediaPlayer = MediaPlayer.create(this, song);
         mediaPlayerFragment.setRewindPoint(0);
         mediaPlayer.start();
 
