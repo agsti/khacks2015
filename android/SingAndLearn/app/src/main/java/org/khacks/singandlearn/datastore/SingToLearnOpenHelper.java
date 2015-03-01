@@ -8,18 +8,20 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by iain on 2/28/15.
  */
 abstract class SingToLearnOpenHelper extends SQLiteOpenHelper {
-    protected static final String DATABASE_NAME = "singtolearn";
-    protected static final int DATABASE_VERSION = 2;
+    protected final String DATABASE_NAME;
+    protected final int DATABASE_VERSION;
     protected final String TABLE_CREATE;
     protected final String TABLE_NAME;
     protected final Context context;
 
 
-    public SingToLearnOpenHelper(Context context, String table_name, String table_create) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public SingToLearnOpenHelper(Context context, String table_name, String table_create, String songsDatabaseName, int songsDatabaseVersion) {
+        super(context, songsDatabaseName, null, songsDatabaseVersion);
         this.context = context;
         TABLE_NAME = table_name;
         TABLE_CREATE = table_create;
+        DATABASE_NAME = songsDatabaseName;
+        DATABASE_VERSION = songsDatabaseVersion;
     }
 
 

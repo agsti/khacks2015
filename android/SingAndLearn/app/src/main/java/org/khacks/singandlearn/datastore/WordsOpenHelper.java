@@ -19,6 +19,10 @@ public class WordsOpenHelper extends SingToLearnOpenHelper {
     static final String WORD_TRANSLATION = "translation";
     private static final String WORD_SIMILAR = "similar_list";
 
+
+    private static final int WORDS_DATABASE_VERSION = 1;
+    private static final String WORDS_DATABASE_NAME = "words.db";
+
     static final String WORDS_TABLE_NAME = "words";
 
 
@@ -36,7 +40,7 @@ public class WordsOpenHelper extends SingToLearnOpenHelper {
                     WORD_TRANSLATION + " TEXT); ";
 
     WordsOpenHelper(Context context) {
-        super(context, WORDS_TABLE_NAME, WORDS_TABLE_CREATE);
+        super(context, WORDS_TABLE_NAME, WORDS_TABLE_CREATE, WORDS_DATABASE_NAME, WORDS_DATABASE_VERSION);
     }
 
 }

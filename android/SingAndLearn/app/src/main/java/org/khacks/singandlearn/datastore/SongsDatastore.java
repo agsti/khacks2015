@@ -40,7 +40,7 @@ public class SongsDatastore {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(
-                SongsOpenHelper.DATABASE_NAME,
+                SongsOpenHelper.SONGS_DATABASE_NAME,
                 null,
                 "id = ?",
                 new String[]{songId},

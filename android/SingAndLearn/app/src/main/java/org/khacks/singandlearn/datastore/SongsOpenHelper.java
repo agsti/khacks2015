@@ -1,6 +1,7 @@
 package org.khacks.singandlearn.datastore;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -24,12 +25,13 @@ public class SongsOpenHelper extends SingToLearnOpenHelper {
     public static final String SONG_SCORE = "score";
     public static final String SONG_FILENAME = "filename";
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int SONGS_DATABASE_VERSION = 1;
+    static final String SONGS_DATABASE_NAME = "songs.db";
 
     public static final String SONGS_TABLE_NAME = "songs";
 
     protected static final String SONGS_TABLE_CREATE =
-            "CREATE TABLE " + SONGS_TABLE_NAME + " (" +
+            "CREATE TABLE songs (" +
                     SONG_ID + " TEXT, " +
                     SONG_ARTIST + " TEXT, " +
                     SONG_NAME + " TEXT, " +
@@ -38,13 +40,13 @@ public class SongsOpenHelper extends SingToLearnOpenHelper {
                     SONG_SCORE + " DOUBLE); ";
 
     SongsOpenHelper(Context context) {
-        super(context, SONGS_TABLE_NAME, SONGS_TABLE_CREATE);
+        super(context, SONGS_TABLE_NAME, SONGS_TABLE_CREATE, SONGS_DATABASE_NAME, SONGS_DATABASE_VERSION);
     }
 
     @Override
     public void onSetup() {
         Integer[][] songs = new Integer[][]{
-                {R.raw.barbie_girl_data,     R.raw.barbie_girl},
+               {R.raw.barbie_girl_data,     R.raw.barbie_girl},
                 {R.raw.i_gotta_feeling_data, R.raw.i_gotta_feeling},
                 {R.raw.sweet_child_data,     R.raw.sweet_child},
                 {R.raw.cool_kids_data,       R.raw.cool_kids},
@@ -55,18 +57,8 @@ public class SongsOpenHelper extends SingToLearnOpenHelper {
             String songFilename = context.getApplicationContext().getResources().getResourceEntryName(song[1]);
             final Gson gson = new Gson();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));
-            try {
-                reader.reset();
-                StringBuilder sb = new StringBuilder();
-                String aux = "";
-                while ((aux = reader.readLine()) != null) {
-                    sb.append(aux);
-                }
-                addSong(gson.fromJson(reader, RawSongData.class), songFilename, sb.toString());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            RawSongData target = gson.fromJson(reader, RawSongData.class);
+            addSong(target, songFilename, gson.toJson(target.lyrics));
         }
     }
 

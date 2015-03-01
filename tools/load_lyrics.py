@@ -1,5 +1,6 @@
 import sys, re
 import json
+import uuid
 
 def split_meta(line):
 	line = re.search(r'^\[([^\]]+)\](.+)?$', line)
@@ -25,27 +26,27 @@ def cleanup_empty_lines(lyrics):
 		if lyric[1] == '':
 			running_count += lyric[0]
 		else:
-			out.append((index, running_count + lyric[0], lyric[1]))
+			out.append({'i': index, 'c': running_count + lyric[0], 't': lyric[1]})
 			index += 1
 			running_count = 0
 	return out
 
 def cleanup_word(word):
-	return re.sub(r'[^\D+]', '', word, flags=re.UNICODE)
+	return re.sub(r'[^\w]', '', word, flags=re.UNICODE).lower()
 
 def extract_words(lyrics):
 	words = {}
 	seen_max = 0
 	complexity_max = 0
 	for lyric in lyrics:
-		word_raw_list = lyric[2].split(' ')
+		word_raw_list = lyric['t'].split(' ')
 		for word_raw in word_raw_list:
 			word_clean = cleanup_word(word_raw)
 			if (word_clean == ''): continue
 			if word_clean not in words:
 				word = {
 					'seen': 1,
-					'at': [(lyric[0], word_raw)],
+					'at': [(lyric['i'], word_raw)],
 					'complexity': len(word_clean),
 					'score': 0,
 					'word': word_clean
@@ -56,7 +57,7 @@ def extract_words(lyrics):
 				word['seen'] += 1
 				seen_max = max(word['seen'], seen_max)
 				complexity_max = max(word['complexity'], complexity_max)
-				word['at'].append((lyric[0], word_raw))
+				word['at'].append((lyric['i'], word_raw))
 	for word in words.keys():
 		words[word]['score'] += float(seen_max) / words[word]['seen']
 		words[word]['score'] += float(words[word]['complexity']) / complexity_max
@@ -80,8 +81,10 @@ def parse_lyrics_file(file):
 	meta_fixed = transform_meta(meta)
 	meta_fixed['lyrics'] = cleanup_empty_lines(lyrics)
 	meta_fixed['words'] = extract_words(meta_fixed['lyrics'])
+	meta_fixed['id'] = 'LY' + str(uuid.uuid1())
 	return meta_fixed
 
 
 if __name__ == '__main__':
-	print json.dumps(parse_lyrics_file(sys.argv[1]))
+	print(json.dumps(parse_lyrics_file(sys.argv[1])))
+
