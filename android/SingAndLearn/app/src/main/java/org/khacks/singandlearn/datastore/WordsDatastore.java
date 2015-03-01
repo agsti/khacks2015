@@ -36,7 +36,7 @@ public class WordsDatastore extends SingToLearnDatastore {
         ContentValues cv = new ContentValues();
         cv.put(WordsOpenHelper.WORD_CORRECT, word.correct);
         cv.put(WordsOpenHelper.WORD_ATTEMPTS, word.attempts);
-        writableDatabase.update(WordsOpenHelper.WORDS_TABLE_NAME, cv, WordsOpenHelper.WORD_SONG + " = ?", new String[]{word.id});
+        writableDatabase.update(WordsOpenHelper.WORDS_TABLE_NAME, cv, WordsOpenHelper.WORD_ID + " = ?", new String[]{word.id});
 
     }
     public void insertWord(String word, String song, int complexity, double score, int seen) {

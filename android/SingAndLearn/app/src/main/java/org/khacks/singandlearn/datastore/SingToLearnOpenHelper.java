@@ -60,6 +60,7 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
         this.wordsDatastore = new WordsDatastore(this.context);
         for (Integer[] song : songs) {
             InputStream dataIn = this.context.getResources().openRawResource(song[0]);
+            
             String songFilename = context.getApplicationContext().getResources().getResourceEntryName(song[1]);
             final Gson gson = new Gson();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));

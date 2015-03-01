@@ -12,7 +12,7 @@ public class SongsOpenHelper{
     public static final String SONG_SCORE = "score";
     public static final String SONG_FILENAME = "filename";
 
-    private static final int SONGS_DATABASE_VERSION = 1;
+    private static final int SONGS_DATABASE_VERSION = 2;
     static final String SONGS_DATABASE_NAME = "songs.db";
 
     public static final String SONGS_TABLE_NAME = "songs";
