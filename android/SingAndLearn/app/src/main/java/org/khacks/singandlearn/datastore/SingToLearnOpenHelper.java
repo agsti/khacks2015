@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import org.khacks.singandlearn.R;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -61,6 +62,11 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
             final BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));
             RawSongData target = gson.fromJson(reader, RawSongData.class);
             addSong(target, songFilename, gson.toJson(target.lyrics));
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
