@@ -112,7 +112,7 @@ public class TestActivity extends Activity {
         Song song = datastore.getSong(correctOne.getSong());
         Word.QuizInfo quizInfo = correctOne.getQuiz(datastore, song);
         RawLyricsData lineAtIndex = quizInfo.lyrics;
-        
+
     }
 
     public void publishScore(boolean isGood){
