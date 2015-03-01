@@ -57,7 +57,7 @@ def extract_words(lyrics):
 				word['seen'] += 1
 				seen_max = max(word['seen'], seen_max)
 				complexity_max = max(word['complexity'], complexity_max)
-				word['at'].append((lyric['i'], word_raw))
+				word['at'].append({'i': lyric['i'], 'r': word_raw})
 	for word in words.keys():
 		words[word]['score'] += float(seen_max) / words[word]['seen']
 		words[word]['score'] += float(words[word]['complexity']) / complexity_max

@@ -78,7 +78,11 @@ public class Word {
         String text = lyricLine.getText();
         int blankStarts = text.indexOf(this.at.get(0).r);
         int blankEnds = blankStarts + this.at.get(0).r.length();
-        String blankedText = text;
+        StringBuilder builder = new StringBuilder();
+        builder.append(text.substring(0, blankStarts));
+        builder.append("  _____  ");
+        builder.append(text.substring(blankEnds, text.length() - 1));
+        String blankedText = builder.toString();
         return new QuizInfo(text, blankStarts, blankEnds, blankedText, lyricLine);
     }
 

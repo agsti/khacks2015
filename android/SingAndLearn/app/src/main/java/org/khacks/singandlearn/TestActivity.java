@@ -55,7 +55,6 @@ public class TestActivity extends Activity {
         datastore = new SongsDatastore(this);
         song = datastore.getSong(songId);
 
-
         mediaPlayerFragment.setSongTitle(song.name);
         mediaPlayerFragment.setArtist(song.artist);
 
@@ -111,7 +110,7 @@ public class TestActivity extends Activity {
         }
         Song song = datastore.getSong(correctOne.getSong());
         Word.QuizInfo quizInfo = correctOne.getQuiz(datastore, song);
-        RawLyricsData lineAtIndex = quizInfo.lyrics;
+        lyricsFragment.setLyrics(quizInfo.blankedText);
 
     }
 
