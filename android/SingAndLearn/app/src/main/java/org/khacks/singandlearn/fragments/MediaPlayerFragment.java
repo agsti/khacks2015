@@ -54,13 +54,7 @@ public class MediaPlayerFragment extends Fragment {
         mediaPlayer = ((TestActivity)getActivity()).getMediaPlayer();
     }
 
-    public void setGoodScore(int goodScore){
-        goodTV.setText(String.valueOf(goodScore));
-    }
-
-    public void setWrongScore(int badScore){
-        wrongTV.setText(String.valueOf(badScore));
-    }
+    
 
     public void setRewindPoint(int rewindPoint){
         this.rewindPoint = rewindPoint;
@@ -75,4 +69,13 @@ public class MediaPlayerFragment extends Fragment {
     }
 
 
+    public void incrementGoodScore() {
+        int currentScore = Integer.parseInt(goodTV.getText().toString()) + 1;
+        goodTV.setText(currentScore);
+    }
+
+    public void incrementWrongScore() {
+        int currentScore = Integer.parseInt(wrongTV.getText().toString()) + 1;
+        goodTV.setText(currentScore);
+    }
 }

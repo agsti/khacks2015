@@ -54,6 +54,9 @@ public class TestActivity extends Activity {
         song = datastore.getSong(songId);
 
 
+        mediaPlayerFragment.setSongTitle(song.name);
+        mediaPlayerFragment.setArtist(song.artist);
+
 
         mediaPlayer = MediaPlayer.create(this, song.res_id);
         mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
@@ -106,6 +109,17 @@ public class TestActivity extends Activity {
         }
 
     }
+
+    public void publishScore(boolean isGood){
+        if(isGood){
+            mediaPlayerFragment.incrementGoodScore();
+        }
+        else{
+            mediaPlayerFragment.incrementWrongScore();
+        }
+    }
+
+
 
 
     public MediaPlayer getMediaPlayer() {

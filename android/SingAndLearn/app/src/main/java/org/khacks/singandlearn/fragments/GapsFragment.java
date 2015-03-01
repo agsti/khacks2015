@@ -9,6 +9,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 import org.khacks.singandlearn.R;
+import org.khacks.singandlearn.TestActivity;
 import org.khacks.singandlearn.datastore.Word;
 import org.khacks.singandlearn.datastore.WordsDatastore;
 
@@ -41,10 +42,13 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
 
 
+        // TODO: the line below might not work,
         TextView view = (TextView) inflater.inflate(R.layout.word_layout, (ViewGroup) getView());
         view.setOnClickListener(this);
         view.setText(word.getWord());
         view.setTag(word);
+
+
 
     }
 
@@ -55,12 +59,10 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         ViewGroup mainView = (ViewGroup)getView();
-        if(mainView.getChildAt(correctAnswer) == v){
+        boolean isCorrectAnswer = (mainView.getChildAt(correctAnswer) == v);
+
+        ((TestActivity)getActivity()).publishScore(isCorrectAnswer);
             // we have clicked a correct answer
-            wordsDatastore.saveAttempt((Word) v.getTag(), true);
-        }
-        else{
-            wordsDatastore.saveAttempt((Word) v.getTag(), false);
-        }
+
     }
 }

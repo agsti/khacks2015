@@ -19,7 +19,6 @@ public class Word {
     int complexity;
 
     String translation;
-    private String[] similar_list;
     private boolean attempt;
 
     public Word(Cursor cursor) {
@@ -56,9 +55,6 @@ public class Word {
 
     }
 
-    private String[] getSimilarWords() {
-        return similar_list;
-    }
 
     public String getWord() {
         return word;
