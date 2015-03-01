@@ -60,6 +60,7 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
         this.wordsDatastore = new WordsDatastore(this.context);
         for (Integer[] song : songs) {
             InputStream dataIn = this.context.getResources().openRawResource(song[0]);
+
             String songFilename = context.getApplicationContext().getResources().getResourceEntryName(song[1]);
             final Gson gson = new Gson();
             final BufferedReader reader = new BufferedReader(new InputStreamReader(dataIn));
@@ -69,17 +70,17 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            addSong(songsDatastore, target, songFilename, gson.toJson(target.lyrics));
+            addSong(songsDatastore, target, songFilename, song[1], gson.toJson(target.lyrics));
         }
     }
 
 
-    private void addSong(SongsDatastore store, RawSongData data, String songFilename, String jsonData) {
+    private void addSong(SongsDatastore store, RawSongData data, String songFilename, int songid, String jsonData) {
         for (RawWordData wordData : data.words.values()) {
             wordData.song_id = data.id;
             addWord(wordData);
         }
-        store.insertSong(data.id, data.title, data.artist, songFilename, jsonData);
+        store.insertSong(data.id, data.title, data.artist, songFilename, songid, jsonData);
     }
 
     private void addWord(RawWordData wordData) {

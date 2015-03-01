@@ -15,6 +15,7 @@ public class Song {
 
     public final String name;
     public final String rawLyrics;
+    public final int res_id;
     private WordsScore score;
     public final String _id;
     public final String artist;
@@ -32,6 +33,10 @@ public class Song {
 
         name = cursor.getString(
                 cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_NAME)
+        );
+
+        res_id = cursor.getInt(
+                cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_RES_ID)
         );
 
         rawLyrics = cursor.getString(

@@ -10,12 +10,14 @@ public class SongsOpenHelper{
     public static final String SONG_NAME = "name";
     public static final String SONG_LYRICS = "lyrics";
     public static final String SONG_SCORE = "score";
+    public static final String SONG_RES_ID = "res_id";
     public static final String SONG_FILENAME = "filename";
 
-    private static final int SONGS_DATABASE_VERSION = 1;
+    private static final int SONGS_DATABASE_VERSION = 2;
     static final String SONGS_DATABASE_NAME = "songs.db";
 
     public static final String SONGS_TABLE_NAME = "songs";
+
 
     protected static final String SONGS_TABLE_CREATE =
             "CREATE TABLE IF NOT EXISTS songs (" +
@@ -24,6 +26,7 @@ public class SongsOpenHelper{
                     SONG_NAME + " TEXT, " +
                     SONG_LYRICS + " TEXT, " +
                     SONG_FILENAME + " TEXT, " +
+                    SONG_RES_ID + " INTEGER, " +
                     SONG_SCORE + " DOUBLE); ";
 
 

@@ -12,6 +12,8 @@ import org.khacks.singandlearn.fragments.GapsFragment;
 import org.khacks.singandlearn.fragments.LyricsFragment;
 import org.khacks.singandlearn.fragments.MediaPlayerFragment;
 
+import java.io.IOException;
+
 /**
  * Created by gus on 28/02/15.
  */
@@ -59,6 +61,12 @@ public class TestActivity extends Activity {
 
         SongsDatastore datastore = new SongsDatastore(this);
         song = datastore.getSong(songId);
+
+        try {
+            Log.i("assets", getAssets().list(".")[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Uri uri = Uri.parse("android.resource://org.khacks.singandlearn/raw/"+song.fileName);
 
