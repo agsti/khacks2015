@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -13,10 +12,10 @@ import java.util.UUID;
  * Created by iain on 2/28/15.
  */
 public class WordsDatastore extends SingToLearnDatastore {
-    private final WordsOpenHelper helper;
+    private final SingToLearnOpenHelper helper;
 
     public WordsDatastore(Context context) {
-        helper = new WordsOpenHelper(context);
+        helper = SingToLearnOpenHelper.getInstance(context);
     }
     public ArrayList<Word> getWordsStatus(String songId) {
         // fetch all words matching song with a nonzero score
@@ -56,9 +55,9 @@ public class WordsDatastore extends SingToLearnDatastore {
     public WordsScore getSongWordsScore(String songId) {
         SQLiteDatabase r = helper.getReadableDatabase();
         Cursor c = r.rawQuery(
-                "SELECT SUM(" + helper.WORD_CORRECT + "), " +
-                "SUM(" + helper.WORD_ATTEMPTS + ") FROM " + helper.TABLE_NAME +
-                " WHERE " + helper.WORD_SONG + " = ?",
+                "SELECT SUM(" + WordsOpenHelper.WORD_CORRECT + "), " +
+                "SUM(" + WordsOpenHelper.WORD_ATTEMPTS + ") FROM " + WordsOpenHelper.WORDS_TABLE_NAME +
+                " WHERE " + WordsOpenHelper.WORD_SONG + " = ?",
                 new String[]{songId});
 
         if (c.getColumnCount() > 0) {

@@ -28,7 +28,7 @@ public class TestActivity extends Activity {
         @Override
         public void run() {
             gapsFragment.setCorrectAnswer(2);
-            gapsFragment.setWords(new String[]{"Hello", "Bye", "Correct", "Wrong"});
+//            gapsFragment.setWords(new String[]{"Hello", "Bye", "Correct", "Wrong"});
 
             lyricsFragment.setLyrics("");
 
@@ -61,6 +61,7 @@ public class TestActivity extends Activity {
 
         Uri songUri = Uri.parse(song.fileName);
         mediaPlayer = MediaPlayer.create(this, songUri);
+        mediaPlayerFragment.setRewindPoint(0);
 
 
 

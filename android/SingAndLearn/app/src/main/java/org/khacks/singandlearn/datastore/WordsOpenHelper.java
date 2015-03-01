@@ -1,11 +1,9 @@
 package org.khacks.singandlearn.datastore;
 
-import android.content.Context;
-
 /**
  * Created by iain on 2/28/15.
  */
-public class WordsOpenHelper extends SingToLearnOpenHelper {
+public class WordsOpenHelper {
 
     static final String WORD_ID = "id";
     static final String WORD_WORD = "word";
@@ -39,8 +37,6 @@ public class WordsOpenHelper extends SingToLearnOpenHelper {
                     WORD_ATTEMPTS +   " INT NOT NULL DEFAULT 0, " +
                     WORD_TRANSLATION + " TEXT); ";
 
-    WordsOpenHelper(Context context) {
-        super(context, WORDS_TABLE_NAME, WORDS_TABLE_CREATE, WORDS_DATABASE_NAME, WORDS_DATABASE_VERSION);
-    }
+
 
 }

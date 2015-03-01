@@ -12,10 +12,13 @@ import java.util.ArrayList;
  */
 public class SongsDatastore {
 
-    private final SongsOpenHelper helper;
+    private final SingToLearnOpenHelper helper;
+
+
 
     public SongsDatastore(Context context) {
-        helper = new SongsOpenHelper(context);
+        helper = SingToLearnOpenHelper.getInstance(context);
+        //helper.onSetup();
     }
 
     public long insertSong(String songId, String title, String artist, String filename, String jsonLyrics) {
