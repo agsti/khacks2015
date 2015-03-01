@@ -37,6 +37,7 @@ public class TestActivity extends Activity {
 
     public static final String SONG_ID = "SONG_ID";
     private SongsDatastore datastore;
+    private WordsDatastore wordsDatastore;
 
 
     @Override
@@ -50,7 +51,11 @@ public class TestActivity extends Activity {
         mediaPlayerFragment = (MediaPlayerFragment) getFragmentManager().findFragmentById(R.id.media_player);
 
 
+
+
         String songId = getIntent().getExtras().getString(SONG_ID);
+
+
 
         datastore = new SongsDatastore(this);
         song = datastore.getSong(songId);
@@ -60,37 +65,69 @@ public class TestActivity extends Activity {
 
 
         mediaPlayer = MediaPlayer.create(this, song.res_id);
-        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
-            public boolean onError(MediaPlayer mp, int what, int extra) {
-                return true;
+            public void onCompletion(MediaPlayer mp) {
+                timer.stop();
             }
         });
+
         mediaPlayer.start();
         mediaPlayerFragment.setRewindPoint(0);
 
+        wordsDatastore = new WordsDatastore(this);
+        
 
         timer = new FixedTimer(new Handler(Looper.getMainLooper()),new Runnable() {
             @Override
             public void run() {
                 try {
-                    Song.LyricsResult result = null;
                     int position = mediaPlayer.getCurrentPosition() / 1000;
-                    result = song.getLyricsAtPosition(position);
+                    Song.LyricsResult result = song.getLyricsAtPosition(position);
                     String lyricsString = result.getLyrics().getText();
                     lyricsFragment.setLyrics(lyricsString);
+                    int index = result.getLyrics().getIndex() + 1;
+                    RawLyricsData nextSegmentData = song.getLineAtIndex(index);
+                    int size = (int) (nextSegmentData.getTime() - result.getLyrics().getTime());
+                    float percentage = (float) ((position-result.getLyrics().getTime())/size );
+                    int highlightTo = (int) (lyricsString.length()*percentage);
+
+                    if(highlightTo == 0)
+                        return;
+
+                    lyricsFragment.setLyricsHighlight(highlightTo);
+
+
                 }catch (IllegalStateException e){
                     Log.d("TestAct", "illegalState: "+e.getMessage());
                 }
             }
-        } , 500);
+        } , 100);
         timer.start();
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if(mediaPlayer != null)
+        outState.putInt("currentpos", mediaPlayer.getCurrentPosition());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null) {
+            int currentPo = savedInstanceState.getInt("currentpos", -1);
+            if (currentPo == -1)
+                return;
+            mediaPlayer.seekTo(currentPo);
+        }
+    }
+
     private void setGapWords(Word correctOne){
         // I'm not sure about this method
-        WordsDatastore wordsDatastore = new WordsDatastore(this);
+
         Word[] incorrectOnes = wordsDatastore.getRandomWords(3, song._id);
         Random random = new Random();
         int luck = random.nextInt(4);

@@ -33,7 +33,8 @@ public class MediaPlayerFragment extends Fragment {
         rewindBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // when should we pause?
-                mediaPlayer.seekTo(rewindPoint);
+                if(mediaPlayer.isPlaying())
+                    mediaPlayer.seekTo(rewindPoint);
 
 
             }
