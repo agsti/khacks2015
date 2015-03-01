@@ -85,7 +85,11 @@ public class TestActivity extends Activity {
                     int position = mediaPlayer.getCurrentPosition() / 1000;
                     Song.LyricsResult result = song.getLyricsAtPosition(position);
                     String lyricsString = result.getLyrics().getText();
+
+
                     lyricsFragment.setLyrics(lyricsString);
+
+
                     int index = result.getLyrics().getIndex() + 1;
                     RawLyricsData nextSegmentData = song.getLineAtIndex(index);
                     int size = (int) (nextSegmentData.getTime() - result.getLyrics().getTime());
@@ -125,9 +129,9 @@ public class TestActivity extends Activity {
         }
     }
 
-    private void setGapWords(Word correctOne){
+    private void setGapWords(){
         // I'm not sure about this method
-
+        Word correctOne = null;
         Word[] incorrectOnes = wordsDatastore.getRandomWords(3, song._id);
         Random random = new Random();
         int luck = random.nextInt(4);
@@ -175,9 +179,12 @@ public class TestActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (timer != null)
         timer.stop();
-        mediaPlayer.stop();
-        mediaPlayer.release();
-        mediaPlayer = null;
+        if(mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

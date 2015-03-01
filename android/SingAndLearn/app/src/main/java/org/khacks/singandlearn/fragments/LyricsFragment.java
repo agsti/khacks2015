@@ -11,26 +11,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.khacks.singandlearn.R;
+
 /**
  * Created by gus on 28/02/15.
  */
 public class LyricsFragment extends Fragment {
 
     private  SpannableStringBuilder style;
-    private ForegroundColorSpan color = new ForegroundColorSpan (Color.RED);
+    private ForegroundColorSpan color = new ForegroundColorSpan (Color.parseColor("#1E88E5"));
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TextView tv = new TextView(getActivity());
-        tv.setText("HERE GOES THE LYRICS");
-        style = new SpannableStringBuilder("RANDOMSTRING");
-        return tv;
+
+
+
+        return inflater.inflate(R.layout.lyrics, container, false);
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        style = new SpannableStringBuilder("RANDOMSTRING");
     }
 
 
