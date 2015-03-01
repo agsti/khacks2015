@@ -15,7 +15,6 @@ public class WordsOpenHelper {
     static final String WORD_SEEN = "seen";
     static final String WORD_SCORE = "score";
     static final String WORD_TRANSLATION = "translation";
-    private static final String WORD_SIMILAR = "similar_list";
 
     static final String WORDS_TABLE_NAME = "words";
 
