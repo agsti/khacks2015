@@ -15,5 +15,7 @@ public class ResultActivity extends Activity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.result_act);
+
+
     }
 }
