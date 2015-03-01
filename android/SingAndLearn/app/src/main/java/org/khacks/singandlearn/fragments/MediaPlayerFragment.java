@@ -70,6 +70,6 @@ public class MediaPlayerFragment extends Fragment {
 
     public void incrementWrongScore() {
         int currentScore = Integer.parseInt(wrongTV.getText().toString()) + 1;
-        goodTV.setText(currentScore);
+        goodTV.setText(String.valueOf(currentScore));
     }
 }
