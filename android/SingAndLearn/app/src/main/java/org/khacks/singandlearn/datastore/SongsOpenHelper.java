@@ -47,7 +47,7 @@ public class SongsOpenHelper extends SingToLearnOpenHelper {
                 {R.raw.i_gotta_feeling_data, R.raw.i_gotta_feeling},
                 {R.raw.sweet_child_data, R.raw.sweet_child},
                 {R.raw.cool_kids_data, R.raw.cool_kids},
-                {R.raw.vertigo_data, R.raw.vertigo}
+                //{R.raw.vertigo_data, R.raw.vertigo}
         };
         for (Integer[] song : songs) {
             InputStream dataIn = context.getResources().openRawResource(song[0]);

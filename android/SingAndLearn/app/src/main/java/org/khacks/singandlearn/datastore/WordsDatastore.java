@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class WordsDatastore extends SingToLearnDatastore {
     private final WordsOpenHelper helper;
 
-    WordsDatastore(Context context) {
+    public WordsDatastore(Context context) {
         helper = new WordsOpenHelper(context);
     }
     public ArrayList<Word> getWordsStatus(String songId) {

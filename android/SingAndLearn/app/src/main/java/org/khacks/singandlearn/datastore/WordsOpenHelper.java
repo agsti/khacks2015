@@ -20,14 +20,12 @@ public class WordsOpenHelper extends SingToLearnOpenHelper {
 
     protected static final String WORDS_TABLE_CREATE =
             "CREATE TABLE " + WORDS_TABLE_NAME + " (" +
-
                     WORD_ID +       " TEXT NOT NULL PRIMARY KEY, " +
                     WORD_WORD +     " TEXT NOT NULL, " +
                     WORD_SONG  +    " TEXT NOT NULL, " +
                     WORD_ISSTAR +   " INTEGER NOT NULL DEFAULT 0, " +
                     WORD_CORRECT +  " INT NOT NULL DEFAULT 0, " +
                     WORD_ATTEMPTS + " INT NOT NULL DEFAULT 0, " +
-
                     WORD_TRANSLATION + " TEXT); ";
 
     WordsOpenHelper(Context context) {
