@@ -20,7 +20,7 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
         return inflater.inflate(R.layout.gaps_main, container, false);
     }
 
-    void setWords(String[] words){
+    public void setWords(String[] words){
         GridLayout layout = (GridLayout)getView();
         layout.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -30,7 +30,7 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    void setCorrectAnswer(int index){
+    public void setCorrectAnswer(int index){
         correctAnswer = index;
     }
 

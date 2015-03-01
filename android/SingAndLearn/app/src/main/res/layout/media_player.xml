@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_weight="1"
         android:id="@+id/playpause_btn"
-        android:src="@drawable/play"
+        android:src="@drawable/rw"
         android:layout_gravity="center"
         android:scaleType="centerInside"
         android:background="#00000000"
@@ -52,17 +52,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
-            android:drawableLeft="@android:drawable/arrow_up_float"
+            android:drawableLeft="@drawable/good"
             android:id="@+id/good_score"
             android:textColor="@android:color/white"
-            android:drawablePadding="8dp"/>
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
             android:id="@+id/wrong_score"
-            android:drawableLeft="@android:drawable/arrow_down_float"
+            android:drawableLeft="@drawable/wrong"
             android:textColor="@android:color/white"
+            android:gravity="center"
             android:drawablePadding="8dp"/>
         </LinearLayout>
 

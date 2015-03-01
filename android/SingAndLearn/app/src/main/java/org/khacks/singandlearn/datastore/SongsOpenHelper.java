@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 
 import org.khacks.singandlearn.R;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

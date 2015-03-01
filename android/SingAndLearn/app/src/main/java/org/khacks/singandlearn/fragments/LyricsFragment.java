@@ -17,7 +17,7 @@ public class LyricsFragment extends Fragment {
         return new TextView(getActivity());
     }
 
-    void setLyrics(String lyric){
+    public void setLyrics(String lyric){
         TextView view = (TextView)getView();
         view.setText(lyric);
     }
