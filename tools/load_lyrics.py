@@ -39,14 +39,16 @@ def extract_words(lyrics):
 	seen_max = 0
 	complexity_max = 0
 	for lyric in lyrics:
+		lyric['l'] = []
 		word_raw_list = lyric['t'].split(' ')
 		for word_raw in word_raw_list:
 			word_clean = cleanup_word(word_raw)
+			lyric['l'].append(word_clean)
 			if (word_clean == ''): continue
 			if word_clean not in words:
 				word = {
 					'seen': 1,
-					'at': [(lyric['i'], word_raw)],
+					'at': [{'i': lyric['i'], 'l': word_raw}],
 					'complexity': len(word_clean),
 					'score': 0,
 					'word': word_clean

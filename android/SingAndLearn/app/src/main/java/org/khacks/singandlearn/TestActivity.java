@@ -102,9 +102,10 @@ public class TestActivity extends Activity {
                         sb.append(part);
                         sb.append(' ');
                     }
-                    lyricsFragment.setLyrics(sb.toString());
-                    Word wordRight = wordsDatastore.getWord(song._id, word_longest);
-                    setGapWords(wordRight);
+
+                    lyricsFragment.setLyrics(lyricsString);//sb.toString());
+                    //wordsDatastore.getWord(song._id, word_longest);
+                    //setGapWords();
 
                     int index = result.getLyrics().getIndex() + 1;
                     RawLyricsData nextSegmentData = song.getLineAtIndex(index);
