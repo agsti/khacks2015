@@ -89,6 +89,10 @@ public class Song {
         return score.number_successes / score.number_attempts;
     }
 
+    public RawLyricsData getLineAtIndex(int index) {
+        return lyrics.get(index);
+    }
+
     public class LyricsResult {
         private final double position;
         private final RawLyricsData lyrics;

@@ -84,7 +84,10 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
     }
 
     private void addWord(RawWordData wordData) {
-        this.wordsDatastore.insertWord(wordData.word, wordData.song_id, wordData.complexity, wordData.score, wordData.seen);
+        final Gson gson = new Gson();
+        String wordAt = gson.toJson(wordData.at);
+        this.wordsDatastore.insertWord(
+                wordData.word, wordData.song_id, wordData.complexity, wordData.score, wordData.seen, wordAt);
     }
 
     @Override

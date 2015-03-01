@@ -39,21 +39,19 @@ public class WordsDatastore extends SingToLearnDatastore {
         writableDatabase.update(WordsOpenHelper.WORDS_TABLE_NAME, cv, WordsOpenHelper.WORD_ID + " = ?", new String[]{word.id});
 
     }
-    public void insertWord(String word, String song, int complexity, double score, int seen) {
+    public void insertWord(String word, String song, int complexity, double score, int seen, String wordAt) {
         String uniqueID = UUID.randomUUID().toString();
         ContentValues cv = new ContentValues();
         cv.put(WordsOpenHelper.WORD_WORD, word);
         cv.put(WordsOpenHelper.WORD_ID, uniqueID);
         cv.put(WordsOpenHelper.WORD_SONG, song);
+        cv.put(WordsOpenHelper.WORD_AT, wordAt);
         cv.put(WordsOpenHelper.WORD_COMPLEXITY, complexity);
         cv.put(WordsOpenHelper.WORD_SCORE, score);
         cv.put(WordsOpenHelper.WORD_SEEN, seen);
         SQLiteDatabase db = helper.getWritableDatabase();
         db.insert(WordsOpenHelper.WORDS_TABLE_NAME, null, cv);
     }
-
-
-
 
     public WordsScore getSongWordsScore(String songId) {
         SQLiteDatabase r = helper.getReadableDatabase();
@@ -92,7 +90,7 @@ public class WordsDatastore extends SingToLearnDatastore {
                 null,
                 WordsOpenHelper.WORD_COMPLEXITY, String.valueOf(howmany));
         int i = 0;
-        while(c.moveToNext()){
+        while (c.moveToNext()){
             Word w = new Word(c);
             words[i] = w;
             i++;
