@@ -3,6 +3,8 @@ package org.khacks.singandlearn;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import org.khacks.singandlearn.datastore.Song;
@@ -19,10 +21,13 @@ public class TestActivity extends Activity {
     private MediaPlayer mediaPlayer;
     private Song song;
 
+
+
+
     GapsFragment gapsFragment;
     LyricsFragment lyricsFragment;
     MediaPlayerFragment mediaPlayerFragment;
-
+    FixedTimer timer;
     Runnable nextParagraph = new Runnable() {
         @Override
         public void run() {
@@ -67,6 +72,15 @@ public class TestActivity extends Activity {
         mediaPlayer.start();
 
 
+        timer = new FixedTimer(new Handler(Looper.getMainLooper()),new Runnable() {
+            @Override
+            public void run() {
+                Song.LyricsResult result = song.getLyricsAtPosition(mediaPlayer.getCurrentPosition());
+                String lyricsString = result.getLyrics().getText();
+                lyricsFragment.setLyrics(lyricsString);
+            }
+        } , 500);
+        timer.start();
 
 
 
@@ -74,5 +88,17 @@ public class TestActivity extends Activity {
 
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
+    }
+
+    public Song getSong() {
+        return song;
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.stop();
+        mediaPlayer.release();
     }
 }

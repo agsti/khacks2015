@@ -3,7 +3,6 @@ package org.khacks.singandlearn.datastore;
 import android.database.Cursor;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +86,10 @@ public class Song {
         public LyricsResult(float position, RawLyricsData rawLyricsData) {
             this.lyrics = rawLyricsData;
             this.position = position;
+        }
+
+        public RawLyricsData getLyrics() {
+            return lyrics;
         }
     }
 }
