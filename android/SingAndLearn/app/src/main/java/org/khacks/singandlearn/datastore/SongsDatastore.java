@@ -20,7 +20,7 @@ public class SongsDatastore {
         helper = SingToLearnOpenHelper.getInstance(context);
     }
 
-    public long insertSong(String songId, String title, String artist, String filename, String jsonLyrics) {
+    public long insertSong(String songId, String title, String artist, String filename, int songid, String jsonLyrics) {
         SQLiteDatabase writableDatabase = helper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         if (title != null) {
@@ -30,6 +30,7 @@ public class SongsDatastore {
             cv.put(SongsOpenHelper.SONG_ARTIST, artist);
         }
         cv.put(SongsOpenHelper.SONG_FILENAME, filename);
+        cv.put(SongsOpenHelper.SONG_RES_ID, songid);
         cv.put(SongsOpenHelper.SONG_LYRICS, jsonLyrics);
         cv.put(SongsOpenHelper.SONG_ID, songId);
         return writableDatabase.insert(SongsOpenHelper.SONGS_TABLE_NAME, null, cv);
