@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/primary">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
-    android:text="50"
-    android:id="@+id/score"
-    android:layout_margin="20dp"
-    android:layout_centerHorizontal="true"
-    />
-    
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/graphLayout">
+
+        <com.echo.holographlibrary.PieGraph
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:id="@+id/graph"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/score"
+            android:text="SCORE"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
     <ListView
-    android:layout_width="match_parent"
-    android:layout_height="600dp"
-    android:layout_below="@id/score"
-    />
-    
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/words"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/graphLayout" />
 
 </RelativeLayout>
