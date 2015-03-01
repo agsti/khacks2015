@@ -73,11 +73,17 @@ public class TestActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    Song.LyricsResult result = null;
                     int position = mediaPlayer.getCurrentPosition() / 1000;
-                    result = song.getLyricsAtPosition(position);
+                    Song.LyricsResult result = song.getLyricsAtPosition(position);
                     String lyricsString = result.getLyrics().getText();
                     lyricsFragment.setLyrics(lyricsString);
+
+                    float percentage = (float) ((position-result.getLyrics().getTime())/result.getPosition());
+                    int highlightTo = (int) (lyricsString.length()*percentage);
+                    Log.d("TestActivity", "highlighting till "+highlightTo);
+                    lyricsFragment.setLyricsHighlight(highlightTo);
+                    
+
                 }catch (IllegalStateException e){
                     Log.d("TestAct", "illegalState: "+e.getMessage());
                 }
@@ -85,6 +91,21 @@ public class TestActivity extends Activity {
         } , 500);
         timer.start();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("currentpos", mediaPlayer.getCurrentPosition());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState != null) {
+            int currentPo = savedInstanceState.getInt("currentpos");
+            mediaPlayer.seekTo(currentPo);
+        }
     }
 
     private void setGapWords(Word correctOne){

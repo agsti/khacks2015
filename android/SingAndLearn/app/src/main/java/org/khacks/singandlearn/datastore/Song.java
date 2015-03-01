@@ -100,5 +100,9 @@ public class Song {
         public RawLyricsData getLyrics() {
             return this.lyrics;
         }
+
+        public double getPosition() {
+            return position;
+        }
     }
 }
