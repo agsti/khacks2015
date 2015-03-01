@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         Log.d("MainAct", "oncreate");
         setContentView(R.layout.activity_main);
 
-      
+
 
 
 

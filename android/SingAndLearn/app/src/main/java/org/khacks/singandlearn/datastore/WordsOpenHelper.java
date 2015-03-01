@@ -25,7 +25,7 @@ public class WordsOpenHelper {
 
 
     protected static final String WORDS_TABLE_CREATE =
-            "CREATE TABLE " + WORDS_TABLE_NAME + " (" +
+            "CREATE TABLE IF NOT EXISTS " + WORDS_TABLE_NAME + " (" +
                     WORD_ID +         " TEXT NOT NULL PRIMARY KEY, " +
                     WORD_WORD +       " TEXT NOT NULL, " +
                     WORD_SONG  +      " TEXT NOT NULL, " +

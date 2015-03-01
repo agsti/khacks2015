@@ -18,7 +18,7 @@ public class SongsOpenHelper{
     public static final String SONGS_TABLE_NAME = "songs";
 
     protected static final String SONGS_TABLE_CREATE =
-            "CREATE TABLE songs (" +
+            "CREATE TABLE IF NOT EXISTS songs (" +
                     SONG_ID + " TEXT, " +
                     SONG_ARTIST + " TEXT, " +
                     SONG_NAME + " TEXT, " +

@@ -41,8 +41,8 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP " + SongsOpenHelper.SONGS_TABLE_NAME+ ";");
-        db.execSQL("DROP " + WordsOpenHelper.WORDS_TABLE_NAME+ ";");
+        db.execSQL("DROP IF EXISTS " + SongsOpenHelper.SONGS_TABLE_NAME+ ";");
+        db.execSQL("DROP IF EXISTS " + WordsOpenHelper.WORDS_TABLE_NAME+ ";");
         db.execSQL(SongsOpenHelper.SONGS_TABLE_CREATE);
         db.execSQL(WordsOpenHelper.WORDS_TABLE_CREATE);
     }
