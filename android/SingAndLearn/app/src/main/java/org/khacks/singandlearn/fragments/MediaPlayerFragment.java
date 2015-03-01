@@ -66,5 +66,13 @@ public class MediaPlayerFragment extends Fragment {
         this.rewindPoint = rewindPoint;
     }
 
+    public void setArtist(String artist){
+        artistTV.setText(artist);
+    }
+
+    public void setSongTitle(String title){
+        songTV.setText(title);
+    }
+
 
 }

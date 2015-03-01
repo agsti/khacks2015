@@ -79,4 +79,24 @@ public class WordsDatastore extends SingToLearnDatastore {
         return null;
     }
 
+
+    public Word[] getRandomWords(int howmany, String songName){
+        Word[] words = new Word[howmany];
+
+        Cursor c = helper.getReadableDatabase().query(
+                WordsOpenHelper.WORDS_TABLE_NAME,
+                new String[]{WordsOpenHelper.WORD_WORD,WordsOpenHelper.WORD_COMPLEXITY},
+                WordsOpenHelper.WORD_COMPLEXITY+"> 3 AND "+WordsOpenHelper.WORD_SONG+"= ?",
+                new String[]{songName},
+                null,
+                null,
+                WordsOpenHelper.WORD_COMPLEXITY, String.valueOf(howmany));
+        int i = 0;
+        while(c.moveToNext()){
+            Word w = new Word(c);
+            words[i] = w;
+            i++;
+        }
+        return words;
+    }
 }

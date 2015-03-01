@@ -30,17 +30,22 @@ public class GapsFragment extends Fragment implements View.OnClickListener {
         wordsDatastore = new WordsDatastore(getActivity());
     }
 
-    public void setWords(Word[] words){
+
+    public void clear(){
+        ((ViewGroup)getView()).removeAllViews();
+    }
+
+    public void putWord(Word word){
         GridLayout layout = (GridLayout)getView();
-        layout.removeAllViews();
+
         LayoutInflater inflater = LayoutInflater.from(getActivity());
 
-        for(Word word : words){
-            TextView view = (TextView) inflater.inflate(R.layout.word_layout, (ViewGroup) getView());
-            view.setOnClickListener(this);
-            view.setText(word.getWord());
-            view.setTag(word);
-        }
+
+        TextView view = (TextView) inflater.inflate(R.layout.word_layout, (ViewGroup) getView());
+        view.setOnClickListener(this);
+        view.setText(word.getWord());
+        view.setTag(word);
+
     }
 
     public void setCorrectAnswer(int index){
