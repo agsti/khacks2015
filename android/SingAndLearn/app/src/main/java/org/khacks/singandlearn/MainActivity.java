@@ -2,7 +2,6 @@ package org.khacks.singandlearn;
 
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,9 +29,7 @@ public class MainActivity extends Activity {
         Log.d("MainAct", "oncreate");
         setContentView(R.layout.activity_main);
 
-        Intent i = new Intent(this, ResultActivity.class);
-        startActivity(i);
-
+      
 
 
 

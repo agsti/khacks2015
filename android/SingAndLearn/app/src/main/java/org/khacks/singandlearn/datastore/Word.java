@@ -1,7 +1,6 @@
 package org.khacks.singandlearn.datastore;
 
 import android.database.Cursor;
-import android.provider.UserDictionary;
 
 /**
  * Created by iain on 2/28/15.
@@ -61,11 +60,11 @@ public class Word {
         return similar_list;
     }
 
-    private String getWord() {
+    public String getWord() {
         return word;
     }
 
-    private  String getSong() {
+    public  String getSong() {
         return song;
     }
 
