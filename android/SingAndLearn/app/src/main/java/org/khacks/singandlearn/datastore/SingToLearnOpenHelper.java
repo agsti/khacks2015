@@ -54,7 +54,7 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
                 {R.raw.i_gotta_feeling_data, R.raw.i_gotta_feeling},
                 {R.raw.sweet_child_data,     R.raw.sweet_child},
                 {R.raw.cool_kids_data,       R.raw.cool_kids},
-                {R.raw.vertigo_data,         R.raw.vertigo_data}
+                {R.raw.vertigo_data,         R.raw.vertigo}
         };
         SongsDatastore songsDatastore = new SongsDatastore(this.context);
         this.wordsDatastore = new WordsDatastore(this.context);

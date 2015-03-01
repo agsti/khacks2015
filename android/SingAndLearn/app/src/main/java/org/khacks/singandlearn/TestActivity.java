@@ -2,7 +2,6 @@ package org.khacks.singandlearn;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -11,8 +10,6 @@ import org.khacks.singandlearn.datastore.SongsDatastore;
 import org.khacks.singandlearn.fragments.GapsFragment;
 import org.khacks.singandlearn.fragments.LyricsFragment;
 import org.khacks.singandlearn.fragments.MediaPlayerFragment;
-
-import java.io.IOException;
 
 /**
  * Created by gus on 28/02/15.
@@ -62,15 +59,10 @@ public class TestActivity extends Activity {
         SongsDatastore datastore = new SongsDatastore(this);
         song = datastore.getSong(songId);
 
-        try {
-            Log.i("assets", getAssets().list(".")[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        Uri uri = Uri.parse("android.resource://org.khacks.singandlearn/raw/"+song.fileName);
 
-        mediaPlayer = MediaPlayer.create(this, song);
+
+        mediaPlayer = MediaPlayer.create(this, song.res_id);
         mediaPlayerFragment.setRewindPoint(0);
         mediaPlayer.start();
 
