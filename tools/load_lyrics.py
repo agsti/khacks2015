@@ -26,7 +26,7 @@ def cleanup_empty_lines(lyrics):
 		if lyric[1] == '':
 			running_count += lyric[0]
 		else:
-			out.append({'i': index, 'c': running_count + lyric[0], 't': lyric[1]})
+			out.append({'i': index, 'c': lyric[0], 't': lyric[1]})
 			index += 1
 			running_count = 0
 	return out
@@ -64,10 +64,15 @@ def extract_words(lyrics):
 	return words
 
 def parse_timecode(raw_timecode):
-	return float(raw_timecode.replace('.', '').replace(':', '.'))
+	timecode_split = raw_timecode.split(':')
+	print(int(timecode_split[0]), float(timecode_split[1]))
+	time = int(timecode_split[0]) * 60
+	time += float(timecode_split[1])
+	return time
 
 def parse_lyrics_file(file):
 	lines = readlines(file)
+	running_timecode = 0
 	meta = {}
 	lyrics = []
 	for line in lines:
@@ -77,7 +82,10 @@ def parse_lyrics_file(file):
 		else:
 			if not line[1]:
 				line = (line[0], '')
-			lyrics.append((parse_timecode(line[0]), line[1].rstrip('\r')))
+			timecode = parse_timecode(line[0])
+			if 'offset' in meta == '500':
+				timecode += float(meta.pop('offset', None)) / 1000
+			lyrics.append((timecode, line[1].rstrip('\r')))
 	meta_fixed = transform_meta(meta)
 	meta_fixed['lyrics'] = cleanup_empty_lines(lyrics)
 	meta_fixed['words'] = extract_words(meta_fixed['lyrics'])

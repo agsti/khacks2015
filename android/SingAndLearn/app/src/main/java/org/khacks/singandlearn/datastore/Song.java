@@ -62,10 +62,18 @@ public class Song {
 
     public LyricsResult getLyricsAtPosition(float position) {
         if (lyrics.size() == 0) return null;
-        int runningCount = 0;
+        RawLyricsData atLyric = lyrics.get(0);
         for (RawLyricsData lyric : lyrics) {
-            if (runningCount >= position) {
-                return new LyricsResult(position - runningCount, lyric);
+            if (lyric.getTime() >= position) {
+                double atPosition;
+                if (atLyric == lyric) {
+                    atPosition = lyrics.get(1).getTime();
+                } else {
+                    atPosition = atLyric.getTime();
+                }
+                return new LyricsResult(Math.abs(atPosition - position), atLyric);
+            } else {
+                atLyric = lyric;
             }
         }
         return new LyricsResult(0, lyrics.get(lyrics.size() - 1));
@@ -83,10 +91,10 @@ public class Song {
     }
 
     public class LyricsResult {
-        private final float position;
+        private final double position;
         private final RawLyricsData lyrics;
 
-        public LyricsResult(float position, RawLyricsData rawLyricsData) {
+        public LyricsResult(double position, RawLyricsData rawLyricsData) {
             this.lyrics = rawLyricsData;
             this.position = position;
         }
