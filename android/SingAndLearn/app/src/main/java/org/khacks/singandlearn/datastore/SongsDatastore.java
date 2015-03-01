@@ -18,7 +18,6 @@ public class SongsDatastore {
 
     public SongsDatastore(Context context) {
         helper = SingToLearnOpenHelper.getInstance(context);
-        helper.onSetup();
     }
 
     public long insertSong(String songId, String title, String artist, String filename, String jsonLyrics) {

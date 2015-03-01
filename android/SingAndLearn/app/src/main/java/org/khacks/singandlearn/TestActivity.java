@@ -59,9 +59,11 @@ public class TestActivity extends Activity {
         SongsDatastore datastore = new SongsDatastore(this);
         song = datastore.getSong(songId);
 
-        Uri songUri = Uri.parse(song.fileName);
-        mediaPlayer = MediaPlayer.create(this, songUri);
+        Uri uri = Uri.parse("android.resource://org.khacks.singandlearn/raw/"+song.fileName);
+
+        mediaPlayer = MediaPlayer.create(this, uri);
         mediaPlayerFragment.setRewindPoint(0);
+        mediaPlayer.start();
 
 
 
