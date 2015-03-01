@@ -5,6 +5,7 @@ import android.database.Cursor;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class Song {
         );
 
         final Gson gson = new Gson();
-        lyrics = gson.fromJson(rawLyrics, new ArrayList<RawLyricsData>().getClass());
+        Type listType = new TypeToken<List<RawLyricsData>>(){}.getType();
+        lyrics = gson.fromJson(rawLyrics, listType);
 
         fileName = cursor.getString(
                 cursor.getColumnIndexOrThrow(SongsOpenHelper.SONG_FILENAME)
@@ -87,6 +89,9 @@ public class Song {
         public LyricsResult(float position, RawLyricsData rawLyricsData) {
             this.lyrics = rawLyricsData;
             this.position = position;
+        }
+        public RawLyricsData getLyrics() {
+            return this.lyrics;
         }
     }
 }
