@@ -9,6 +9,8 @@ import android.os.PersistableBundle;
  */
 public class ResultActivity extends Activity {
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);

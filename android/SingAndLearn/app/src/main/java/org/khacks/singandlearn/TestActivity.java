@@ -24,6 +24,23 @@ public class TestActivity extends Activity {
     LyricsFragment lyricsFragment;
     MediaPlayerFragment mediaPlayerFragment;
 
+    Runnable nextParagraph = new Runnable() {
+        @Override
+        public void run() {
+            gapsFragment.setCorrectAnswer(2);
+            gapsFragment.setWords(new String[]{"Hello", "Bye", "Correct", "Wrong"});
+
+            lyricsFragment.setLyrics("");
+
+//            mediaPlayerFragment.setGoodScore();
+//            mediaPlayerFragment.setWrongScore();
+//            mediaPlayerFragment.setRewindPoint(mediaPlayer.getCurrentPosition());
+
+            // then schedule for the next ti
+
+        }
+    };
+
     public static final String SONG_ID = "SONG_ID";
 
 
