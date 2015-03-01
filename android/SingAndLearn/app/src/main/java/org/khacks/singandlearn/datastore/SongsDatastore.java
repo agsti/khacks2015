@@ -68,12 +68,7 @@ public class SongsDatastore {
 
     }
 
-    private ArrayList<Song> fetchSong(String where) {
-        if (where != null) {
 
-        }
-        return null;
-    }
 
     public ArrayList<Song> getAllSongsWithScores(WordsDatastore wordsDatastore) {
         Cursor songCursor = getAllSongs();
