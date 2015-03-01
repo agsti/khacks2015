@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class Song {
 
-
     public final String name;
     public final String rawLyrics;
     private WordsScore score;
@@ -54,6 +53,17 @@ public class Song {
         score = wordsDatastore.getSongWordsScore(this._id);
     }
 
+    public LyricsResult getLyricsAtPosition(float position) {
+        if (lyrics.size() == 0) return null;
+        int runningCount = 0;
+        for (RawLyricsData lyric : lyrics) {
+            if (runningCount >= position) {
+                return new LyricsResult(position - runningCount, lyric);
+            }
+        }
+        return new LyricsResult(0, lyrics.get(lyrics.size() - 1));
+    }
+
     public boolean hasScore() {
         return score != null;
     }
@@ -65,4 +75,13 @@ public class Song {
         return score.number_successes / score.number_attempts;
     }
 
+    public class LyricsResult {
+        private final float position;
+        private final RawLyricsData lyrics;
+
+        public LyricsResult(float position, RawLyricsData rawLyricsData) {
+            this.lyrics = rawLyricsData;
+            this.position = position;
+        }
+    }
 }

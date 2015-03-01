@@ -43,9 +43,9 @@ public class SongsDatastore {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(
-                SongsOpenHelper.SONGS_DATABASE_NAME,
+                SongsOpenHelper.SONGS_TABLE_NAME,
                 null,
-                "id = ?",
+                SongsOpenHelper.SONG_ID + " = ?",
                 new String[]{songId},
                 null, null, null);
 
@@ -71,12 +71,7 @@ public class SongsDatastore {
 
     }
 
-    private ArrayList<Song> fetchSong(String where) {
-        if (where != null) {
 
-        }
-        return null;
-    }
 
     public ArrayList<Song> getAllSongsWithScores(WordsDatastore wordsDatastore) {
         Cursor songCursor = getAllSongs();

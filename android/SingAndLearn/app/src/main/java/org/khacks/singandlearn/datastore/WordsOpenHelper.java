@@ -17,10 +17,6 @@ public class WordsOpenHelper {
     static final String WORD_TRANSLATION = "translation";
     private static final String WORD_SIMILAR = "similar_list";
 
-
-    private static final int WORDS_DATABASE_VERSION = 1;
-    private static final String WORDS_DATABASE_NAME = "words.db";
-
     static final String WORDS_TABLE_NAME = "words";
 
 

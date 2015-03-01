@@ -22,6 +22,7 @@ public class WordsDatastore extends SingToLearnDatastore {
         // serialize and return as Word objects w/ a score and attempts
         return new ArrayList<Word>();
     }
+
     public int getSongScore(String songId) {
         // fetch the overall score for all words in the song (averging)
         // return the avg score
@@ -52,6 +53,8 @@ public class WordsDatastore extends SingToLearnDatastore {
     }
 
 
+
+
     public WordsScore getSongWordsScore(String songId) {
         SQLiteDatabase r = helper.getReadableDatabase();
         Cursor c = r.rawQuery(
@@ -66,7 +69,6 @@ public class WordsDatastore extends SingToLearnDatastore {
             wordsScore.number_successes = c.getInt(0);
             wordsScore.number_attempts = c.getInt(1);
             return wordsScore;
-
         }
         return null;
     }
