@@ -7,7 +7,7 @@ import android.content.Context;
  */
 public class WordsOpenHelper extends SingToLearnOpenHelper {
 
-    private static final String WORD_ID = "id";
+    static final String WORD_ID = "id";
     static final String WORD_WORD = "word";
     static final String WORD_SONG = "song";
     static final String WORD_CORRECT = "correct";

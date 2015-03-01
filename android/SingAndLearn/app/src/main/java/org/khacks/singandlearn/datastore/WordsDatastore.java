@@ -40,9 +40,10 @@ public class WordsDatastore extends SingToLearnDatastore {
 
     }
     public void insertWord(String word, String song, int complexity, double score, int seen) {
-        String  uniqueID = UUID.randomUUID().toString();
+        String uniqueID = UUID.randomUUID().toString();
         ContentValues cv = new ContentValues();
         cv.put(WordsOpenHelper.WORD_WORD, word);
+        cv.put(WordsOpenHelper.WORD_ID, uniqueID);
         cv.put(WordsOpenHelper.WORD_SONG, song);
         cv.put(WordsOpenHelper.WORD_COMPLEXITY, complexity);
         cv.put(WordsOpenHelper.WORD_SCORE, score);
