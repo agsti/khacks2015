@@ -87,29 +87,35 @@ public class TestActivity extends Activity {
 
                     String lyricsString = result.getLyrics().getText();
 
-                    
-                    String word_longest = "";
-                    int word_longest_index = 0;
-                    for (String word : result.getLyrics().getList()) {
-                        if (word.length() > word_longest.length()) {
-                            word_longest = word;
-                            break;
-                        }
-                        word_longest_index++;
-                    }
-                    String[] parts = lyricsString.split(" ");
-                    parts[word_longest_index] = "_____";
                     StringBuilder sb = new StringBuilder();
-                    for (String part : parts) {
-                        sb.append(part);
+                    String[] parts = lyricsString.split(" ");
+                    if (result.getLyrics().getList().size() > 0 && result.getLyrics().getList().size() == parts.length) {
+                        String word_longest = "";
+                        int index2 = 0;
+                        int word_longest_index = 0;
+                        for (String word : result.getLyrics().getList()) {
+                            if (word.length() > word_longest.length()) {
+                                word_longest = word;
+                                word_longest_index = index2;
+                            }
+                            index2++;
+                        }
+
+                        parts[word_longest_index] = "_____";
+
+                        for (String part : parts) {
+                            sb.append(part);
+                            sb.append(' ');
+                        }
+
+                    } else {
                         sb.append(' ');
                     }
 
+                    Word longestWord = wordsDatastore.getWord(song._id, word_longest);
+                    setGapWords(longestWord);
 
-                    //wordsDatastore.getWord(song._id, word_longest);
-                    //setGapWords();
-
-                    lyricsFragment.setLyrics(lyricsString);
+                    lyricsFragment.setLyrics(sb.toString());
 
                     int index = result.getLyrics().getIndex() + 1;
                     RawLyricsData nextSegmentData = song.getLineAtIndex(index);
@@ -150,10 +156,9 @@ public class TestActivity extends Activity {
         }
     }
 
-    private void setGapWords(){
+    private void setGapWords(Word correctOne){
         // I'm not sure about this method
-        Word correctOne = null;
-        Word[] incorrectOnes = wordsDatastore.getRandomWords(3, song._id);
+        Word[] incorrectOnes = wordsDatastore.getRandomWords(4, song._id);
         Random random = new Random();
         int luck = random.nextInt(4);
         gapsFragment.setCorrectAnswer(luck);
@@ -164,15 +169,16 @@ public class TestActivity extends Activity {
             }
             else{
                 gapsFragment.putWord(incorrectOnes[i]);
-                i++;
+
             }
+            i++;
         }
         if(luck == 3){
             gapsFragment.putWord(correctOne);
         }
-        Song song = datastore.getSong(correctOne.getSong());
-        Word.QuizInfo quizInfo = correctOne.getQuiz(datastore, song);
-        lyricsFragment.setLyrics(quizInfo.blankedText);
+        //Song song = datastore.getSong(correctOne.getSong());
+        //Word.QuizInfo quizInfo = correctOne.getQuiz(datastore, song);
+        //lyricsFragment.setLyrics(quizInfo.blankedText);
 
     }
 

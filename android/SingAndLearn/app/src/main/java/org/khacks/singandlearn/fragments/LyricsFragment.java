@@ -40,8 +40,8 @@ public class LyricsFragment extends Fragment {
 
 
 
-    public void setLyricsHighlight( int end){
-        if(end < lyric.length()) {
+    public void setLyricsHighlight(int end){
+        if(end < lyric.length() && end > 0) {
             style.setSpan(color, 0, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             ((TextView) getView()).setText(style);
         }
