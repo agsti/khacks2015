@@ -3,6 +3,7 @@ package org.khacks.singandlearn.datastore;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -16,15 +17,15 @@ import java.io.InputStreamReader;
  * Created by iain on 2/28/15.
  */
 public class SingToLearnOpenHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "song_db";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "song.db";
+    private static final int DATABASE_VERSION = 2;
 
     protected final Context context;
 
     private static SingToLearnOpenHelper instance;
 
     public static SingToLearnOpenHelper getInstance(Context c){
-        if(instance == null){
+        if (instance == null){
             instance = new SingToLearnOpenHelper(c);
         }
         return instance;
@@ -34,8 +35,6 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
     private SingToLearnOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-
-
     }
 
 
@@ -82,9 +81,9 @@ public class SingToLearnOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.i("DB", SongsOpenHelper.SONGS_TABLE_CREATE);
         db.execSQL(SongsOpenHelper.SONGS_TABLE_CREATE);
         db.execSQL(WordsOpenHelper.WORDS_TABLE_CREATE);
-
     }
 
 
