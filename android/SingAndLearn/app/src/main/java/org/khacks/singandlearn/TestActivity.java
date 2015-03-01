@@ -87,9 +87,10 @@ public class TestActivity extends Activity {
                 try {
                     int position = mediaPlayer.getCurrentPosition() / 1000;
                     Song.LyricsResult result = song.getLyricsAtPosition(position);
-                    if(lastResult == result) {
+                    if(lastResult != result) {
                         gapsFragment.clear();
                     }
+                    lastResult = result;
 
 
                     String lyricsString = result.getLyrics().getText();
