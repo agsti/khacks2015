@@ -65,7 +65,6 @@ def extract_words(lyrics):
 
 def parse_timecode(raw_timecode):
 	timecode_split = raw_timecode.split(':')
-	print(int(timecode_split[0]), float(timecode_split[1]))
 	time = int(timecode_split[0]) * 60
 	time += float(timecode_split[1])
 	return time
