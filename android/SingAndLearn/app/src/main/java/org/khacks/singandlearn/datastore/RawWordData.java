@@ -1,5 +1,7 @@
 package org.khacks.singandlearn.datastore;
 
+import java.util.List;
+
 /**
  * Created by iain on 3/1/15.
  */
@@ -10,4 +12,10 @@ public class RawWordData {
     public String word;
 
     public String song_id;
+    public List<WordAtRawData> at;
+
+    public class WordAtRawData {
+        int i;
+        String r;
+    }
 }

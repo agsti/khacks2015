@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import org.khacks.singandlearn.datastore.RawLyricsData;
 import org.khacks.singandlearn.datastore.Song;
 import org.khacks.singandlearn.datastore.SongsDatastore;
 import org.khacks.singandlearn.datastore.Word;
@@ -35,6 +36,7 @@ public class TestActivity extends Activity {
 
 
     public static final String SONG_ID = "SONG_ID";
+    private SongsDatastore datastore;
 
 
     @Override
@@ -50,7 +52,7 @@ public class TestActivity extends Activity {
 
         String songId = getIntent().getExtras().getString(SONG_ID);
 
-        SongsDatastore datastore = new SongsDatastore(this);
+        datastore = new SongsDatastore(this);
         song = datastore.getSong(songId);
 
 
@@ -90,7 +92,7 @@ public class TestActivity extends Activity {
     private void setGapWords(Word correctOne){
         // I'm not sure about this method
         WordsDatastore wordsDatastore = new WordsDatastore(this);
-        Word[] incorrectOnes = wordsDatastore.getRandomWords(3, song.name);
+        Word[] incorrectOnes = wordsDatastore.getRandomWords(3, song._id);
         Random random = new Random();
         int luck = random.nextInt(4);
         gapsFragment.setCorrectAnswer(luck);
@@ -107,7 +109,10 @@ public class TestActivity extends Activity {
         if(luck == 3){
             gapsFragment.putWord(correctOne);
         }
-
+        Song song = datastore.getSong(correctOne.getSong());
+        Word.QuizInfo quizInfo = correctOne.getQuiz(datastore, song);
+        RawLyricsData lineAtIndex = quizInfo.lyrics;
+        
     }
 
     public void publishScore(boolean isGood){
