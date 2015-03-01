@@ -23,9 +23,10 @@ public class FixedTimer {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                runnable.run();
-                if(shouldRun)
+                if(shouldRun) {
+                    runnable.run();
                     handler.postDelayed(this, delay);
+                }
             }
         }, delay);
     }

@@ -32,22 +32,7 @@ public class TestActivity extends Activity {
     LyricsFragment lyricsFragment;
     MediaPlayerFragment mediaPlayerFragment;
     FixedTimer timer;
-    Runnable nextParagraph = new Runnable() {
-        @Override
-        public void run() {
-            gapsFragment.setCorrectAnswer(2);
-//            gapsFragment.setWords(new String[]{"Hello", "Bye", "Correct", "Wrong"});
 
-            lyricsFragment.setLyrics("");
-
-//            mediaPlayerFragment.setGoodScore();
-//            mediaPlayerFragment.setWrongScore();
-//            mediaPlayerFragment.setRewindPoint(mediaPlayer.getCurrentPosition());
-
-            // then schedule for the next ti
-
-        }
-    };
 
     public static final String SONG_ID = "SONG_ID";
 
@@ -74,7 +59,6 @@ public class TestActivity extends Activity {
         mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Log.d("MEDIA PLAYER", "error here!");
                 return true;
             }
         });
@@ -92,7 +76,7 @@ public class TestActivity extends Activity {
                     String lyricsString = result.getLyrics().getText();
                     lyricsFragment.setLyrics(lyricsString);
                 }catch (IllegalStateException e){
-
+                    Log.d("TestAct", "illegalState: "+e.getMessage());
                 }
             }
         } , 500);
@@ -101,13 +85,14 @@ public class TestActivity extends Activity {
     }
 
     private void setGapWords(Word correctOne){
+        // I'm not sure about this method
         WordsDatastore wordsDatastore = new WordsDatastore(this);
         Word[] incorrectOnes = wordsDatastore.getRandomWords(3, song.name);
         Random random = new Random();
         int luck = random.nextInt(4);
         gapsFragment.setCorrectAnswer(luck);
         int i = 0;
-        while (i < 4){
+        while (i < 3){
             if(i == luck){
                 gapsFragment.putWord(correctOne);
             }
@@ -115,6 +100,9 @@ public class TestActivity extends Activity {
                 gapsFragment.putWord(incorrectOnes[i]);
                 i++;
             }
+        }
+        if(luck == 3){
+            gapsFragment.putWord(correctOne);
         }
 
     }
@@ -133,6 +121,8 @@ public class TestActivity extends Activity {
     protected void onPause() {
         super.onPause();
         timer.stop();
+        mediaPlayer.stop();
         mediaPlayer.release();
+        mediaPlayer = null;
     }
 }
